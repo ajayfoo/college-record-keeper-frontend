@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "html-webpack-plugin": "^5.6.0",
+    "jsdoc": "^4.0.2",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "name": "vanilla-js-web-project-template",
+  "version": "0.1.0",
+  "description": "A Vanilla JavaScript Web Project Template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "Ajay K",
+  "license": "MIT"
+}
