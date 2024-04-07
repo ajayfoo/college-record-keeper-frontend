@@ -1,3 +1,5 @@
+import './style.css';
+
 const SearchText = () => {
   const searchTextEle = document.createElement('div');
   searchTextEle.classList.add('search-text-ele');
@@ -6,12 +8,13 @@ const SearchText = () => {
   searchTextBox.type = 'text';
   searchTextBox.minLength = 1;
   searchTextBox.maxLength = 20;
+  searchTextBox.id = 'search-textbox';
 
   const searchBtn = document.createElement('button');
   searchBtn.textContent = 'Search';
 
   searchTextEle.append(searchTextBox, searchBtn);
-  return searchBtn;
+  return searchTextEle;
 };
 
 const FilterPlacementStatus = () => {
@@ -34,7 +37,7 @@ const FilterPlacementStatus = () => {
 
   const placementStatusFieldPlaced = document.createElement('div');
   placementStatusFieldPlaced.classList.add('placement-status-field');
-  placementStatusFieldPlaced.appendChild(placedFlagLabel, placedFlag);
+  placementStatusFieldPlaced.append(placedFlagLabel, placedFlag);
 
   const notPlacedFlag = document.createElement('input');
   notPlacedFlag.type = 'radio';
@@ -46,7 +49,7 @@ const FilterPlacementStatus = () => {
 
   const placementStatusFieldNotPlaced = document.createElement('div');
   placementStatusFieldNotPlaced.classList.add('placement-status-field');
-  placementStatusFieldNotPlaced.appendChild(notPlacedFlagLabel, notPlacedFlag);
+  placementStatusFieldNotPlaced.append(notPlacedFlagLabel, notPlacedFlag);
 
   placementStatusFlags.append(
     placementStatusFieldPlaced,
@@ -72,17 +75,13 @@ const SearchFilter = () => {
   filterYearLabel.setAttribute('for', 'filter-year-select');
 
   const filterYearSelect = document.createElement('select');
-  filterYearSelect.id = 'fiter-year-select';
+  filterYearSelect.id = 'filter-year-select';
 
   const filterPlacementStatusEle = FilterPlacementStatus();
 
   filterYearEle.append(filterYearLabel, filterYearSelect);
 
-  searchFilterEle.append(
-    searchFilterEle,
-    filterYearEle,
-    filterPlacementStatusEle
-  );
+  searchFilterEle.append(filterYearEle, filterPlacementStatusEle);
 
   return searchFilterEle;
 };
@@ -91,7 +90,7 @@ const SearchRegion = () => {
   const searchRegionEle = document.createElement('div');
   searchRegionEle.classList.add('search-region');
 
-  searchRegionEle.append(SearchText, SearchFilter());
+  searchRegionEle.append(SearchText(), SearchFilter());
   return searchRegionEle;
 };
 
