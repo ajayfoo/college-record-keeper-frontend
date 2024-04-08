@@ -2,7 +2,7 @@ import './style.css';
 
 const SearchText = () => {
   const searchTextEle = document.createElement('div');
-  searchTextEle.classList.add('search-text-ele');
+  searchTextEle.classList.add('search-text');
 
   const searchTextBox = document.createElement('input');
   searchTextBox.type = 'text';

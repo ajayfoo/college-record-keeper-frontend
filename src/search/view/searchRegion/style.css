@@ -2,5 +2,31 @@
   margin: 2em 15em;
   padding: 1em;
   border-radius: 30px;
-  background-color: lightblue;
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+
+.search-text {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 10px;
+}
+.search-text > * {
+  font-size: 1.2em;
+  padding: 0.3em;
+  border-radius: 7px;
+  border: none;
+  outline-color: var(--outline);
+}
+
+.search-text > button {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  cursor: pointer;
+}
+.search-text > button:hover {
+  background-color: var(--secondary-hover);
+}
+.search-text > button:active {
+  background-color: var(--secondary-active);
 }
