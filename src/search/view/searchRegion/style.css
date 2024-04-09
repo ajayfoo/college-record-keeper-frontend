@@ -6,6 +6,11 @@
   color: var(--on-secondary-container);
 }
 
+.search-region > *,
+.search-filter > * {
+  margin: 1rem 0;
+}
+
 .search-text {
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -29,4 +34,51 @@
 }
 .search-text > button:active {
   background-color: var(--secondary-active);
+}
+
+.search-filter > .filter > :first-child {
+  font-weight: 600;
+  margin-right: 1em;
+}
+
+.search-filter > h3 {
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 0;
+}
+.filter-placement-status {
+  display: flex;
+}
+.placement-status-flags {
+  display: flex;
+}
+
+.placement-status-field {
+  margin-right: 0.5em;
+}
+
+.placement-status-field > input[type='radio'] {
+  appearance: none;
+  margin: 0;
+  width: fit-content;
+  font-size: inherit;
+  color: inherit;
+}
+.placement-status-field > input[type='radio']::after {
+  border-radius: 5px;
+  padding: 0.15em 0.3em;
+  border: 1px solid var(--outline);
+}
+
+.placement-status-field > input[id='filter-placed-flag']::after {
+  content: 'Placed';
+}
+
+.placement-status-field > input[id='filter-not-placed-flag']::after {
+  content: 'Not Placed';
+}
+
+.placement-status-field > input[type='radio']:checked::after {
+  color: var(--on-tertiary);
+  background-color: var(--tertiary);
 }

@@ -20,6 +20,7 @@ const SearchText = () => {
 const FilterPlacementStatus = () => {
   const filterPlacementStatusEle = document.createElement('div');
   filterPlacementStatusEle.classList.add('filter-placement-status');
+  filterPlacementStatusEle.classList.add('filter');
 
   const placementStatusLabel = document.createElement('p');
   placementStatusLabel.textContent = 'Placement Status';
@@ -30,26 +31,21 @@ const FilterPlacementStatus = () => {
   const placedFlag = document.createElement('input');
   placedFlag.type = 'radio';
   placedFlag.id = 'filter-placed-flag';
-
-  const placedFlagLabel = document.createElement('label');
-  placedFlagLabel.textContent = 'Placed';
-  placedFlagLabel.setAttribute('for', 'filter-placed-flag');
+  placedFlag.name = 'placement-status';
+  placedFlag.checked = true;
 
   const placementStatusFieldPlaced = document.createElement('div');
   placementStatusFieldPlaced.classList.add('placement-status-field');
-  placementStatusFieldPlaced.append(placedFlagLabel, placedFlag);
+  placementStatusFieldPlaced.appendChild(placedFlag);
 
   const notPlacedFlag = document.createElement('input');
   notPlacedFlag.type = 'radio';
   notPlacedFlag.id = 'filter-not-placed-flag';
-
-  const notPlacedFlagLabel = document.createElement('label');
-  notPlacedFlagLabel.textContent = 'Not Placed';
-  notPlacedFlagLabel.setAttribute('for', 'filter-not-placed-flag');
+  notPlacedFlag.name = 'placement-status';
 
   const placementStatusFieldNotPlaced = document.createElement('div');
   placementStatusFieldNotPlaced.classList.add('placement-status-field');
-  placementStatusFieldNotPlaced.append(notPlacedFlagLabel, notPlacedFlag);
+  placementStatusFieldNotPlaced.appendChild(notPlacedFlag);
 
   placementStatusFlags.append(
     placementStatusFieldPlaced,
@@ -69,6 +65,7 @@ const SearchFilter = () => {
 
   const filterYearEle = document.createElement('div');
   filterYearEle.classList.add('filter-year');
+  filterYearEle.classList.add('filter');
 
   const filterYearLabel = document.createElement('label');
   filterYearLabel.textContent = 'Year';
@@ -81,7 +78,11 @@ const SearchFilter = () => {
 
   filterYearEle.append(filterYearLabel, filterYearSelect);
 
-  searchFilterEle.append(filterYearEle, filterPlacementStatusEle);
+  searchFilterEle.append(
+    searchFilterHeading,
+    filterYearEle,
+    filterPlacementStatusEle
+  );
 
   return searchFilterEle;
 };

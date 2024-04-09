@@ -11,12 +11,15 @@
 *::after {
   box-sizing: inherit;
 }
+body,
+p {
+  margin: 0;
+  padding: 0;
+}
 body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 10vh 90vh;
-  margin: 0;
-  padding: 0;
   background-color: #fef7ff;
   --primary: #65558f;
   --primary-hover: #76669f;
