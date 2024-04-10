@@ -1,5 +1,5 @@
 .search-region {
-  margin: 2em 15em;
+  margin: 2em 15%;
   padding: 1em;
   border-radius: 30px;
   background-color: var(--secondary-container);
@@ -21,7 +21,6 @@
   padding: 0.3em;
   border-radius: 7px;
   border: none;
-  outline-color: var(--outline);
 }
 
 .search-text > button {
@@ -42,10 +41,16 @@
 }
 
 .search-filter > h3 {
-  text-decoration: underline;
   font-weight: bold;
   padding: 0;
+  border-bottom: 2px solid currentColor;
+  text-align: center;
 }
+
+.filter-year > select {
+  border-radius: 5px;
+}
+
 .filter-placement-status {
   display: flex;
 }
