@@ -1,4 +1,7 @@
 import './style.css';
+import ExportIconSrc from './images/export.svg';
+import EditIconSrc from './images/edit.svg';
+import DeleteIconSrc from './images/delete.svg';
 
 const SearchResultHeader = () => {
   const searchResultHeaderEle = document.createElement('div');
@@ -21,13 +24,22 @@ const SearchResultHeader = () => {
   actionButtons.classList.add('action-buttons');
 
   const exportBtn = document.createElement('button');
-  exportBtn.textContent = 'Export';
+  exportBtn.classList.add('export');
+  const exportIcon = document.createElement('img');
+  exportIcon.src = ExportIconSrc;
+  exportBtn.appendChild(exportIcon);
 
   const editBtn = document.createElement('button');
-  editBtn.textContent = 'Edit';
+  editBtn.classList.add('edit');
+  const editIcon = document.createElement('img');
+  editIcon.src = EditIconSrc;
+  editBtn.appendChild(editIcon);
 
   const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
+  deleteBtn.classList.add('delete');
+  const deleteIcon = document.createElement('img');
+  deleteIcon.src = DeleteIconSrc;
+  deleteBtn.appendChild(deleteIcon);
 
   actionButtons.append(exportBtn, editBtn, deleteBtn);
 
