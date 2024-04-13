@@ -6,11 +6,15 @@
   color: var(--on-secondary-container);
   border: 1px solid;
 }
-
-.search-result-header {
+.search-result-header,
+.search-result > .results > .result {
   display: flex;
   justify-content: space-between;
   padding: 0 1em;
+}
+
+.search-result-header {
+  margin-bottom: 1em;
 }
 
 .search-result-header > .select-all-field {
@@ -22,36 +26,38 @@
   font-family: inherit;
   font-size: inherit;
 }
-.search-result-header > .select-all-field > input[type='checkbox'] {
+.search-result-header > .select-all-field > input[type='checkbox'],
+.search-result > .results > .result > input[type='checkbox'] {
   appearance: none;
   width: 1.2em;
   height: 1.2em;
   border: 1px solid black;
   border-radius: 30%;
+  margin-right: 0.7em;
 }
 
-.search-result-header > .action-buttons {
+.search-result-header > .action-buttons,
+.search-result > .results > .result > .action-buttons {
   display: flex;
 }
 
-.search-result-header > .action-buttons > .export,
-.search-result-header > .action-buttons > .edit,
-.search-result-header > .action-buttons > .delete {
+.search-result-header > .action-buttons > *,
+.search-result > .results > .result > .action-buttons > * {
   padding: 0;
   width: 1.5em;
   height: 1.5em;
   border: none;
   cursor: pointer;
   background-color: inherit;
-  margin-right: 0.65em;
+  margin-right: 1.2em;
 }
-.search-result-header > .action-buttons > :last-child {
+.search-result-header > .action-buttons > :last-child,
+.search-result > .results > .result > .action-buttons > :last-child {
   margin-right: 0;
 }
 
-.search-result-header > .action-buttons > .export > img,
-.search-result-header > .action-buttons > .edit > img,
-.search-result-header > .action-buttons > .delete > img {
+.search-result-header > .action-buttons > * > img,
+.search-result > .results > .result > .action-buttons > * > img {
   padding: 0.1em;
   width: 100%;
   height: 100%;

@@ -46,10 +46,60 @@ const SearchResultHeader = () => {
   searchResultHeaderEle.append(selectAllField, actionButtons);
   return searchResultHeaderEle;
 };
+
+const Result = (resultInfo) => {
+  const resultEle = document.createElement('div');
+  resultEle.classList.add('result');
+
+  const selectCheckbox = document.createElement('input');
+  selectCheckbox.type = 'checkbox';
+  selectCheckbox.id = 'select-result-someuniquehash';
+
+  const resultInfoEle = document.createElement('p');
+  resultInfoEle.classList.add('result-info');
+  resultInfoEle.textContent = resultInfo;
+
+  const actionButtons = document.createElement('div');
+  actionButtons.classList.add('action-buttons');
+
+  const exportBtn = document.createElement('button');
+  exportBtn.classList.add('export');
+  const exportIcon = document.createElement('img');
+  exportIcon.src = ExportIconSrc;
+  exportBtn.appendChild(exportIcon);
+
+  const editBtn = document.createElement('button');
+  editBtn.classList.add('edit');
+  const editIcon = document.createElement('img');
+  editIcon.src = EditIconSrc;
+  editBtn.appendChild(editIcon);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('delete');
+  const deleteIcon = document.createElement('img');
+  deleteIcon.src = DeleteIconSrc;
+  deleteBtn.appendChild(deleteIcon);
+
+  actionButtons.append(exportBtn, editBtn, deleteBtn);
+
+  resultEle.append(selectCheckbox, resultInfoEle, actionButtons);
+
+  return resultEle;
+};
+
+const Results = () => {
+  const resultsEle = document.createElement('div');
+  resultsEle.classList.add('results');
+
+  resultsEle.append(Result('resultInfo'));
+
+  return resultsEle;
+};
+
 const SearchResult = () => {
   const searchResultEle = document.createElement('div');
   searchResultEle.classList.add('search-result');
-  searchResultEle.append(SearchResultHeader());
+  searchResultEle.append(SearchResultHeader(), Results());
   return searchResultEle;
 };
 
