@@ -91,7 +91,7 @@ const Results = () => {
   const resultsEle = document.createElement('div');
   resultsEle.classList.add('results');
 
-  resultsEle.append(Result('resultInfo'));
+  resultsEle.append(Result('resultInfo'), Result('resultInfo1'));
 
   return resultsEle;
 };

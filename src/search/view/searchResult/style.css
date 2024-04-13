@@ -1,20 +1,28 @@
 .search-result {
   margin: 2em 15%;
-  padding: 1em;
   border-radius: 30px;
   background-color: var(--secondary-container);
   color: var(--on-secondary-container);
-  border: 1px solid;
+  padding-bottom: 0.65em;
+  border: 1px solid var(--scrim);
 }
 .search-result-header,
 .search-result > .results > .result {
   display: flex;
   justify-content: space-between;
-  padding: 0 1em;
 }
 
 .search-result-header {
-  margin-bottom: 1em;
+  padding: 1em 2em 0.7em;
+  margin-bottom: 1.3em;
+  border-bottom: 1px solid var(--scrim);
+}
+
+.search-result > .results > .result {
+  margin: 0.6em 1.3em;
+  padding: 0.5em 0.7em;
+  background-color: var(--surface-container-low);
+  border-radius: 7px;
 }
 
 .search-result-header > .select-all-field {
