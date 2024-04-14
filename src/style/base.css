@@ -26,6 +26,7 @@ body {
   --primary-hover: #76669f;
   --primary-active: #8777af;
   --on-primary: #ffffff;
+  --primary-80: #cfcdff;
   --secondary: #625b71;
   --secondary-hover: #736c82;
   --secondary-active: #847d93;
@@ -66,7 +67,6 @@ nav {
   color: var(--on-primary-container);
   margin: 0 auto;
   text-align: center;
-  padding: 1.1em;
   border-radius: 15px;
 }
 
@@ -79,9 +79,10 @@ nav {
   gap: 5rem;
 }
 
-.main-action-buttons > button {
+.main-action-buttons > .enfold > button {
   font-size: 1.7rem;
   padding: 0.2em 1em;
+  margin: 0.65em 0;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -89,10 +90,10 @@ nav {
   color: var(--on-primary);
 }
 
-.main-action-buttons > button:hover {
+.main-action-buttons > .enfold > button:hover {
   background-color: var(--primary-hover);
 }
-.main-action-buttons > button:active {
+.main-action-buttons > .enfold > button:active {
   background-color: var(--primary-active);
 }
 
@@ -102,4 +103,15 @@ main {
   margin: 0 0.5em 0.5em;
   border-radius: 15px;
   color: var(--on-surface);
+}
+
+.main-action-buttons > .enfold.active {
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 0.6em;
+  padding-bottom: 0.1em;
+  background-color: var(--surface-container);
+}
+
+.main-action-buttons > .enfold.active > button {
+  margin-top: 0.3em;
 }
