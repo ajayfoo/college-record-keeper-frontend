@@ -106,7 +106,10 @@ main {
 }
 
 .main-action-buttons > .enfold.active {
-  border-radius: 15px 15px 15px 15px;
+  width: fit-content;
+  padding: 0 1em;
+  position: relative;
+  border-radius: 15px 15px 0 15px;
   margin-top: 0.6em;
   padding-bottom: 0.1em;
   background-color: var(--surface-container);
@@ -114,4 +117,25 @@ main {
 
 .main-action-buttons > .enfold.active > button {
   margin-top: 0.3em;
+}
+.enfold.active::after {
+  position: absolute;
+  bottom: 0;
+  right: -30px;
+  content: '';
+  border-radius: 0 0 0 15px;
+  box-shadow: -15px 0 0 0 var(--surface-container);
+  width: 30px;
+  height: 15px;
+}
+
+.enfold.active::before {
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+  content: '';
+  border-radius: 0 0 15px 0;
+  box-shadow: 15px 0 0 0 var(--surface-container);
+  width: 30px;
+  height: 15px;
 }
