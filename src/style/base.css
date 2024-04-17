@@ -90,6 +90,19 @@ nav {
   color: var(--on-primary);
 }
 
+.main-action-buttons > .enfold.active {
+  width: fit-content;
+  padding: 0.2em 1em;
+  position: relative;
+  border-radius: 15px 15px 0 15px;
+  margin-top: 0.9em;
+  background-color: var(--surface-container);
+}
+
+.main-action-buttons > .enfold.active > button {
+  margin: 0.3em 0;
+}
+
 .main-action-buttons > .enfold > button:hover {
   background-color: var(--primary-hover);
 }
@@ -105,19 +118,6 @@ main {
   color: var(--on-surface);
 }
 
-.main-action-buttons > .enfold.active {
-  width: fit-content;
-  padding: 0 1em;
-  position: relative;
-  border-radius: 15px 15px 0 15px;
-  margin-top: 0.6em;
-  padding-bottom: 0.1em;
-  background-color: var(--surface-container);
-}
-
-.main-action-buttons > .enfold.active > button {
-  margin-top: 0.3em;
-}
 .enfold.active::after {
   position: absolute;
   bottom: 0;
