@@ -68,6 +68,9 @@ nav {
   margin: 0 auto;
   text-align: center;
   border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .main-action-buttons {
@@ -75,14 +78,19 @@ nav {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-content: center;
   gap: 5rem;
+}
+
+.main-action-buttons > .enfold {
+  padding: 1em 1em 1.2em;
+  border-radius: 15px 15px 0 15px;
+  position: relative;
+  width: fit-content;
 }
 
 .main-action-buttons > .enfold > button {
   font-size: 1.7rem;
   padding: 0.2em 1em;
-  margin: 0.65em 0;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -91,16 +99,7 @@ nav {
 }
 
 .main-action-buttons > .enfold.active {
-  width: fit-content;
-  padding: 0.2em 1em;
-  position: relative;
-  border-radius: 15px 15px 0 15px;
-  margin-top: 0.9em;
   background-color: var(--surface-container);
-}
-
-.main-action-buttons > .enfold.active > button {
-  margin: 0.3em 0;
 }
 
 .main-action-buttons > .enfold > button:hover {
