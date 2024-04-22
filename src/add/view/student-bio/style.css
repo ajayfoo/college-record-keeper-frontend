@@ -1,4 +1,10 @@
-.student-bio-form {
+.student-bio {
+  padding: 2em;
   background-color: var(--secondary-container);
   color: var(--on-secondary-container);
+  border-radius: 30px;
+}
+
+.student-bio > * > form {
+  border-radius: 30px;
 }

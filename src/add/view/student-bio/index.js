@@ -1,42 +1,59 @@
-import * as Components from '../components';
+import { FormHeading, Field } from '../components';
 import './style.css';
 
 const StudentBioForm = () => {
   const studentBioForm = document.createElement('div');
-  studentBioForm.classList.add('student-bio-form');
+  const form = document.createElement('form');
   const ID_PREFIX = 'add-student-bio-form';
-  studentBioForm.append(
-    Components.FormHeading('Student Bio'),
-    Components.Field('First Name', {
+  form.append(
+    Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
       type: 'text',
     }),
-    Components.Field('Middle Name', {
+    Field('Middle Name', {
       id: `${ID_PREFIX}-middle-name`,
       type: 'text',
     }),
-    Components.Field('Last Name', {
+    Field('Last Name', {
       id: `${ID_PREFIX}-last-name`,
       type: 'text',
     }),
-    Components.Field('CET Score', {
+    Field('CET Score', {
       id: `${ID_PREFIX}-cet-score`,
       type: 'number',
     }),
-    Components.Field('HSC Percentage', {
+    Field('HSC Percentage', {
       id: `${ID_PREFIX}-hsc-percentage`,
       type: 'number',
     }),
-    Components.Field('SSC Percentage', {
+    Field('SSC Percentage', {
       id: `${ID_PREFIX}-ssc-percentage`,
       type: 'number',
     }),
-    Components.Field('Year Of Admission', {
+    Field('Year Of Admission', {
       id: `${ID_PREFIX}-year-of-admission`,
       type: 'number',
     })
   );
+
+  studentBioForm.append(form);
   return studentBioForm;
 };
 
-export default StudentBioForm;
+const StudentBio = () => {
+  const studentBio = document.createElement('div');
+  studentBio.classList.add('student-bio');
+
+  const form = StudentBioForm();
+
+  const formHeading = FormHeading('Student Bio', () => {
+    const currentStyle = getComputedStyle(form).display;
+    form.style.display = currentStyle === 'block' ? 'none' : 'block';
+  });
+
+  studentBio.append(formHeading, form);
+
+  return studentBio;
+};
+
+export default StudentBio;

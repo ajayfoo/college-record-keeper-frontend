@@ -1,0 +1,5 @@
+.form-heading {
+  cursor: pointer;
+  border-bottom: 1px solid var(--scrim);
+  margin-bottom: 1em;
+}
