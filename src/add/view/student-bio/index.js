@@ -3,6 +3,7 @@ import './style.css';
 
 const StudentBioForm = () => {
   const studentBioForm = document.createElement('div');
+  studentBioForm.classList.add('form-wrapper');
   const form = document.createElement('form');
   const ID_PREFIX = 'add-student-bio-form';
   form.append(

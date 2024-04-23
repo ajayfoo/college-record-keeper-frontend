@@ -10,6 +10,9 @@ const FormHeading = (name, showForm) => {
   formHeading.textContent = name;
   formHeading.classList.add('form-heading');
   formHeading.addEventListener('click', showForm);
+  formHeading.addEventListener('click', () => {
+    formHeading.classList.toggle('open');
+  });
   return formHeading;
 };
 const Field = (name, attributes) => {
