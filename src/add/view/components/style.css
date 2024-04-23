@@ -1,8 +1,8 @@
 .form-heading {
   cursor: pointer;
-  border-bottom: 1px solid var(--scrim);
 }
 
-.form-heading.open {
-  margin-bottom: 1em;
+.field {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,28 @@
+.forms-accordion {
+  margin: 2em 2.5%;
+  padding: 2em;
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  border-radius: 30px;
+}
+
+.forms-accordion .form-wrapper {
+  display: none;
+}
+
+.forms-accordion > * {
+  border-bottom: 1px solid var(--scrim);
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.forms-accordion > :last-child {
+  margin-bottom: unset;
+}
+
+.accordion-form {
+  margin: 1em 1em 0.5em 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1em 2em;
+}

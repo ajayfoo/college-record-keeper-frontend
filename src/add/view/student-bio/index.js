@@ -5,6 +5,7 @@ const StudentBioForm = () => {
   const studentBioForm = document.createElement('div');
   studentBioForm.classList.add('form-wrapper');
   const form = document.createElement('form');
+  form.classList.add('accordion-form');
   const ID_PREFIX = 'add-student-bio-form';
   form.append(
     Field('First Name', {
