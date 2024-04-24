@@ -28,7 +28,9 @@ const setupEventListeners = () => {
   });
 };
 const init = () => {
-  workspaceEle.appendChild(searchController.getView());
+  workspaceEle.appendChild(addController.getView());
+  searchBtn.classList.remove('active');
+  addBtn.classList.add('active');
   setupEventListeners();
 };
 
