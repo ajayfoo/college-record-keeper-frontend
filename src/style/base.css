@@ -30,6 +30,10 @@ body {
   --primary-active: #8777af;
   --on-primary: #ffffff;
   --primary-80: #cfcdff;
+  --primary-50: #8069bf;
+  --on-primary-50: #ffffff;
+  --primary-50-hover: #917acf;
+  --primary-50-active: #a28bdf;
   --secondary: #625b71;
   --secondary-hover: #736c82;
   --secondary-active: #847d93;

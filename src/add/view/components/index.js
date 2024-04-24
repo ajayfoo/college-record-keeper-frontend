@@ -26,4 +26,15 @@ const Field = (name, attributes) => {
   field.append(label, input);
   return field;
 };
-export { FormHeading, Field };
+
+const SubmitMainFormButton = (name, id, onClick) => {
+  const submitBtn = document.createElement('button', () => {});
+  submitBtn.classList.add('submit-main-form-button');
+  submitBtn.textContent = name;
+  submitBtn.id = id;
+  submitBtn.type = 'submit';
+  submitBtn.addEventListener('click', onClick);
+  return submitBtn;
+};
+
+export { FormHeading, Field, SubmitMainFormButton };

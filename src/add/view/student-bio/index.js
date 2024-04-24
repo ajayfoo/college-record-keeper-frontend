@@ -1,4 +1,4 @@
-import { FormHeading, Field } from '../components';
+import { FormHeading, Field, SubmitMainFormButton } from '../components';
 import './style.css';
 
 const StudentBioForm = () => {
@@ -7,6 +7,7 @@ const StudentBioForm = () => {
   const form = document.createElement('form');
   form.classList.add('accordion-form');
   const ID_PREFIX = 'add-student-bio-form';
+
   form.append(
     Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
@@ -35,7 +36,8 @@ const StudentBioForm = () => {
     Field('Year Of Admission', {
       id: `${ID_PREFIX}-year-of-admission`,
       type: 'number',
-    })
+    }),
+    SubmitMainFormButton('Add', `${ID_PREFIX}-submit`, () => {})
   );
 
   studentBioForm.append(form);
