@@ -1,14 +1,10 @@
-import { FormHeading, Field, SubmitMainFormButton } from '../components';
+import { Field, SubmitMainFormButton, AccordionFormItem } from '../components';
 import './style.css';
 
-const StudentBioForm = () => {
-  const studentBioForm = document.createElement('div');
-  studentBioForm.classList.add('form-wrapper');
-  const form = document.createElement('form');
-  form.classList.add('accordion-form');
+const StudentBioAccordionFormItem = () => {
   const ID_PREFIX = 'add-student-bio-form';
 
-  form.append(
+  const fields = [
     Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
       type: 'text',
@@ -37,27 +33,9 @@ const StudentBioForm = () => {
       id: `${ID_PREFIX}-year-of-admission`,
       type: 'number',
     }),
-    SubmitMainFormButton('Add', `${ID_PREFIX}-submit`, () => {})
-  );
-
-  studentBioForm.append(form);
-  return studentBioForm;
+    SubmitMainFormButton('Add', `${ID_PREFIX}-submit`, () => {}),
+  ];
+  return AccordionFormItem('Student Bio', fields);
 };
 
-const StudentBio = () => {
-  const studentBio = document.createElement('div');
-  studentBio.classList.add('student-bio');
-
-  const form = StudentBioForm();
-
-  const formHeading = FormHeading('Student Bio', () => {
-    const currentStyle = getComputedStyle(form).display;
-    form.style.display = currentStyle === 'block' ? 'none' : 'block';
-  });
-
-  studentBio.append(formHeading, form);
-
-  return studentBio;
-};
-
-export default StudentBio;
+export default StudentBioAccordionFormItem;

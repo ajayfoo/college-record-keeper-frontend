@@ -19,10 +19,3 @@
 .forms-accordion > :last-child {
   margin-bottom: unset;
 }
-
-.accordion-form {
-  margin: 1em 1em 0.5em 1em;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1em 2em;
-}

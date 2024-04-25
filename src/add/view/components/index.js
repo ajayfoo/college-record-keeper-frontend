@@ -5,13 +5,15 @@ const setMultipleAttributes = (ele, attributes) => {
     ele.setAttribute(key, value);
   });
 };
-const FormHeading = (name, showForm) => {
-  const formHeading = document.createElement('h3');
-  formHeading.textContent = name;
-  formHeading.classList.add('form-heading');
-  formHeading.addEventListener('click', showForm);
-  return formHeading;
+
+const AccordionFormItemHeading = (name, showForm) => {
+  const component = document.createElement('h3');
+  component.textContent = name;
+  component.classList.add('form-heading');
+  component.addEventListener('click', showForm);
+  return component;
 };
+
 const Field = (name, attributes) => {
   const field = document.createElement('div');
   field.classList.add('field');
@@ -37,4 +39,26 @@ const SubmitMainFormButton = (name, id, onClick) => {
   return submitBtn;
 };
 
-export { FormHeading, Field, SubmitMainFormButton };
+const AccordionFormItem = (name, fields) => {
+  const accordionFormItem = document.createElement('div');
+  accordionFormItem.classList.add('accordion-form-item');
+
+  const form = document.createElement('form');
+  form.classList.add('hidden');
+  fields.forEach((field) => form.appendChild(field));
+  const showForm = () => {
+    form.classList.toggle('hidden');
+  };
+
+  const heading = AccordionFormItemHeading(name, showForm);
+
+  accordionFormItem.append(heading, form);
+  return accordionFormItem;
+};
+
+export {
+  AccordionFormItemHeading,
+  Field,
+  SubmitMainFormButton,
+  AccordionFormItem,
+};
