@@ -1,13 +1,11 @@
-import StudentBioAccordionFormItem from '../student-bio';
+import AchievementType from './achievement-type';
+import StudentBio from './student-bio';
 import './style.css';
 
 const FormsAccordion = () => {
   const formsAccordion = document.createElement('div');
   formsAccordion.classList.add('forms-accordion');
-  formsAccordion.append(
-    StudentBioAccordionFormItem(),
-    StudentBioAccordionFormItem()
-  );
+  formsAccordion.append(StudentBio(), AchievementType());
   return formsAccordion;
 };
 

@@ -1,7 +1,11 @@
-import { Field, SubmitMainFormButton, AccordionFormItem } from '../components';
+import {
+  Field,
+  SubmitMainFormButton,
+  AccordionFormItem,
+} from '../../components';
 import './style.css';
 
-const StudentBioAccordionFormItem = () => {
+const StudentBio = () => {
   const ID_PREFIX = 'add-student-bio-form';
 
   const fields = [
@@ -38,4 +42,4 @@ const StudentBioAccordionFormItem = () => {
   return AccordionFormItem('Student Bio', fields);
 };
 
-export default StudentBioAccordionFormItem;
+export default StudentBio;
