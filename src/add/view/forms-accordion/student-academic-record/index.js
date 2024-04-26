@@ -16,6 +16,9 @@ const StudentAcademicRecord = () => {
     Field('Year', {
       id: `${ID_PREFIX}-year`,
       type: 'number',
+      min: '1900',
+      max: '2090',
+      step: 1,
     }),
     Field('Score', {
       id: `${ID_PREFIX}-score`,

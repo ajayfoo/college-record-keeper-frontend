@@ -9,6 +9,8 @@ const Company = () => {
   const fields = [
     Field('Name', {
       id: `${ID_PREFIX}-name`,
+      minlength: 1,
+      maxlength: 150,
     }),
     Field('Mininum Salary', {
       id: `${ID_PREFIX}-minimum-salary`,
@@ -21,6 +23,9 @@ const Company = () => {
     Field('Year', {
       id: `${ID_PREFIX}-year`,
       type: 'number',
+      min: '1900',
+      max: '2090',
+      step: 1,
     }),
     SubmitMainFormButton('Add', ID_PREFIX, () => {}),
   ];
