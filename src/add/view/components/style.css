@@ -2,6 +2,9 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
+.form-heading:hover {
+  color: var(--inverse-on-primary-container);
+}
 
 .field {
   font-size: 1.2rem;

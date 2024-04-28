@@ -44,6 +44,7 @@ body {
   --on-error: #ffffff;
   --primary-container: #eaddff;
   --on-primary-container: #21005d;
+  --inverse-on-primary-container: #65449f;
   --secondary-container: #e8def8;
   --on-secondary-container: #1d192b;
   --tertiary-container: #ffd8e4;

@@ -3,8 +3,7 @@
   border-radius: 30px;
   background-color: var(--secondary-container);
   color: var(--on-secondary-container);
-  padding-bottom: 0.65em;
-  border: 1px solid var(--scrim);
+  padding-bottom: 2em;
 }
 .search-result-header,
 .search-result > .results > .result {
@@ -13,18 +12,21 @@
 }
 
 .search-result-header {
-  padding: 1em 2em 0.7em;
-  margin-bottom: 1.3em;
+  padding: 2em 2.7em 1.5em;
+  margin-bottom: 1.5em;
   border-bottom: 1px solid var(--scrim);
 }
 
 .search-result > .results > .result {
-  margin: 0.6em 1.3em;
+  margin: 1.5em 2em;
   padding: 0.5em 0.7em;
   background-color: var(--primary-80);
   border-radius: 7px;
 }
 
+.search-result > .results > .result:last-child {
+  margin-bottom: 0;
+}
 .search-result-header > .select-all-field {
   display: flex;
   align-items: center;
