@@ -2,7 +2,8 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
-.form-heading:hover {
+.form-heading:hover,
+.form-heading.selected {
   color: var(--inverse-on-primary-container);
 }
 

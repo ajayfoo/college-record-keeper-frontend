@@ -11,6 +11,9 @@ const AccordionFormItemHeading = (name, showForm) => {
   component.textContent = name;
   component.classList.add('form-heading');
   component.addEventListener('click', showForm);
+  component.addEventListener('click', () => {
+    component.classList.toggle('selected');
+  });
   return component;
 };
 
