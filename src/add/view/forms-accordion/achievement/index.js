@@ -1,8 +1,6 @@
-import {
-  Field,
-  SubmitMainFormButton,
-  AccordionFormItem,
-} from '../../components';
+import Field from '../../../../components';
+
+import { SubmitMainFormButton, AccordionFormItem } from '../../components';
 
 const Achievement = () => {
   const ID_PREFIX = 'add-achievement-form';

@@ -1,0 +1,17 @@
+.field {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  outline-color: var(--outline);
+}
+
+.field > label {
+  margin-bottom: 0.3em;
+}
+
+.field > input {
+  padding: 0.3em;
+  border-radius: 7px;
+  border: none;
+  font-size: inherit;
+}

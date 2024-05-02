@@ -1,8 +1,5 @@
-import {
-  Field,
-  SubmitMainFormButton,
-  AccordionFormItem,
-} from '../../components';
+import Field from '../../../../components';
+import { SubmitMainFormButton, AccordionFormItem } from '../../components';
 import './style.css';
 
 const StudentBio = () => {

@@ -1,8 +1,6 @@
-import {
-  Field,
-  SubmitMainFormButton,
-  AccordionFormItem,
-} from '../../components';
+import Field from '../../../../components';
+
+import { SubmitMainFormButton, AccordionFormItem } from '../../components';
 
 const StudentAcademicRecord = () => {
   const ID_PREFIX = 'add-student-academic-record-form';
