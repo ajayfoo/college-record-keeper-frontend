@@ -14,23 +14,6 @@
     sans-serif;
   font-size: 14px;
   color: #1d1b20;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  outline-color: var(--outline);
-}
-body,
-p,
-h1,
-h2,
-h3 {
-  margin: 0;
-  padding: 0;
-}
-body {
   --primary: #65558f;
   --primary-hover: #76669f;
   --primary-active: #8777af;
@@ -74,4 +57,20 @@ body {
   --outline-variant: #cac4d0;
   --scrim: #000000;
   --shadow: #000000;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  outline-color: var(--outline);
+}
+
+body,
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
 }

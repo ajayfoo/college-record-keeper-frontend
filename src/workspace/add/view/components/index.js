@@ -11,16 +11,6 @@ const AccordionFormItemHeading = (name, showForm) => {
   return component;
 };
 
-const SubmitMainFormButton = (name, formId, onClick) => {
-  const submitBtn = document.createElement('button', () => {});
-  submitBtn.classList.add('submit-main-form-button');
-  submitBtn.textContent = name;
-  submitBtn.id = `${formId}-submit`;
-  submitBtn.type = 'submit';
-  submitBtn.addEventListener('click', onClick);
-  return submitBtn;
-};
-
 const AccordionFormItem = (name, fields) => {
   const accordionFormItem = document.createElement('div');
   accordionFormItem.classList.add('accordion-form-item');
@@ -38,4 +28,4 @@ const AccordionFormItem = (name, fields) => {
   return accordionFormItem;
 };
 
-export { AccordionFormItemHeading, SubmitMainFormButton, AccordionFormItem };
+export { AccordionFormItemHeading, AccordionFormItem };

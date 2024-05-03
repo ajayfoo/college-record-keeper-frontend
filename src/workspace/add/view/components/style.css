@@ -7,26 +7,6 @@
   color: var(--inverse-on-primary-container);
 }
 
-.submit-main-form-button {
-  cursor: pointer;
-  font-size: 1.2rem;
-  border-radius: 7px;
-  align-self: end;
-  justify-self: start;
-  padding: 0.4em 1.5em;
-  border: none;
-  background-color: var(--primary-50);
-  color: var(--on-primary-50);
-}
-
-.submit-main-form-button:hover {
-  background-color: var(--primary-50-hover);
-}
-
-.submit-main-form-button:active {
-  background-color: var(--primary-50-active);
-}
-
 .accordion-form-item > form {
   margin: 1em 1em 1.5em 1em;
   display: grid;

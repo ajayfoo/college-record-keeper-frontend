@@ -20,4 +20,14 @@ const Field = (name, attributes) => {
   return field;
 };
 
-export default Field;
+const SubmitMainFormButton = (name, formId, onClick) => {
+  const submitBtn = document.createElement('button', () => {});
+  submitBtn.classList.add('submit-main-form-button');
+  submitBtn.textContent = name;
+  submitBtn.id = `${formId}-submit`;
+  submitBtn.type = 'submit';
+  submitBtn.addEventListener('click', onClick);
+  return submitBtn;
+};
+
+export { Field, SubmitMainFormButton };
