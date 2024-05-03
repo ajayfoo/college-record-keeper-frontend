@@ -1,4 +1,4 @@
-import Field from '../../../../components';
+import Field from '../../../../../components';
 
 import { SubmitMainFormButton, AccordionFormItem } from '../../components';
 

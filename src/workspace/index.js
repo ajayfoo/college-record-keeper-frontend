@@ -1,4 +1,4 @@
-import './style/base.css';
+import './style.css';
 import AddController from './add';
 import SearchController from './search';
 
@@ -34,4 +34,4 @@ const init = () => {
   setupEventListeners();
 };
 
-init();
+export default init;
