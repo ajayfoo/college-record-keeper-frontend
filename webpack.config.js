@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
 
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = 'style-loader';
@@ -26,6 +27,7 @@ const config = {
       template: './src/templates/login.html',
       chunks: ['login'],
     }),
+    new DotenvWebpackPlugin(),
   ],
   module: {
     rules: [

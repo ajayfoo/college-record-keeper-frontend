@@ -4,11 +4,11 @@ import { AccordionFormItem } from '../../components';
 const AchievementType = () => {
   const ID_PREFIX = 'add-achievement-type-form';
   const fields = [
-    Field('Type', {
-      id: `${ID_PREFIX}-type`,
+    Field('Label', {
+      id: `${ID_PREFIX}-label`,
       placeholder: 'eg. Sports, Extra Curricular',
     }),
-    SubmitMainFormButton('Add', ID_PREFIX, () => {}),
+    SubmitMainFormButton('Add', ID_PREFIX),
   ];
   return AccordionFormItem('Achievement Type', fields);
 };

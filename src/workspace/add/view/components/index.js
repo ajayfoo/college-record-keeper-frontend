@@ -1,3 +1,4 @@
+import { getHttpEndpointForForm } from '../../../../utils';
 import './style.css';
 
 const AccordionFormItemHeading = (name, showForm) => {
@@ -17,10 +18,22 @@ const AccordionFormItem = (name, fields) => {
 
   const form = document.createElement('form');
   form.classList.add('hidden');
+  form.method = 'post';
+  form.action = getHttpEndpointForForm(name);
   fields.forEach((field) => form.appendChild(field));
   const showForm = () => {
     form.classList.toggle('hidden');
   };
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = {};
+    fields.forEach((field) => {
+      console.log(field);
+      const input = field.querySelector('input');
+      if (input === null) return;
+      data[input.name] = input.value;
+    });
+  });
 
   const heading = AccordionFormItemHeading(name, showForm);
 

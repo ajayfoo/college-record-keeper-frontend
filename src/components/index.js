@@ -15,18 +15,18 @@ const Field = (name, attributes) => {
 
   const input = document.createElement('input');
   setMultipleAttributes(input, attributes);
+  input.name = name.replaceAll(' ', '');
 
   field.append(label, input);
   return field;
 };
 
-const SubmitMainFormButton = (name, formId, onClick) => {
+const SubmitMainFormButton = (name, formId) => {
   const submitBtn = document.createElement('button', () => {});
   submitBtn.classList.add('submit-main-form-button');
   submitBtn.textContent = name;
   submitBtn.id = `${formId}-submit`;
   submitBtn.type = 'submit';
-  submitBtn.addEventListener('click', onClick);
   return submitBtn;
 };
 
