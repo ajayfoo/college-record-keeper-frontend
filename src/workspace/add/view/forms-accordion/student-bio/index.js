@@ -26,7 +26,7 @@ const StudentBio = () => {
       required: 'true',
       maxlength: 150,
     }),
-    Field('CET Score', {
+    Field('CET Percentile', {
       id: `${ID_PREFIX}-cet-score`,
       type: 'number',
       required: 'true',
@@ -47,9 +47,17 @@ const StudentBio = () => {
       min: 0,
       max: 100,
     }),
+    Field('DOB', {
+      id: `${ID_PREFIX}-dob`,
+      type: 'date',
+      required: 'true',
+      min: '1900',
+      max: '2090',
+      step: 1,
+    }),
     Field('Year Of Admission', {
       id: `${ID_PREFIX}-year-of-admission`,
-      type: 'number',
+      type: 'date',
       required: 'true',
       min: '1900',
       max: '2090',

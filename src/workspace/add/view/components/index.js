@@ -1,4 +1,4 @@
-import { getHttpEndpointForForm } from '../../../../utils';
+import { getHttpEndpointForForm, postDataForForm } from '../../../../utils';
 import './style.css';
 
 const AccordionFormItemHeading = (name, showForm) => {
@@ -28,11 +28,12 @@ const AccordionFormItem = (name, fields) => {
     event.preventDefault();
     const data = {};
     fields.forEach((field) => {
-      console.log(field);
       const input = field.querySelector('input');
       if (input === null) return;
       data[input.name] = input.value;
     });
+    console.log(data);
+    postDataForForm(name, data);
   });
 
   const heading = AccordionFormItemHeading(name, showForm);
