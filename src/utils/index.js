@@ -24,4 +24,12 @@ const postDataForForm = async (name, data) => {
   return response.json();
 };
 
-export { getHttpEndpointForForm, postDataForForm };
+const getLatestStudents = async () => {
+  const response = await fetch(process.env.BACKEND_URL + '/student/latests', {
+    method: 'GET',
+    mode: 'cors',
+  });
+  return response.json();
+};
+
+export { getHttpEndpointForForm, postDataForForm, getLatestStudents };

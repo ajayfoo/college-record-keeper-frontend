@@ -6,10 +6,9 @@ const addBtn = document.getElementById('go-to-add');
 const searchBtn = document.getElementById('go-to-search');
 
 const addController = AddController();
-const searchController = SearchController();
 const workspaceEle = document.getElementById('workspace');
 
-const workspaces = [addController.getView(), searchController.getView()];
+const workspaces = [];
 
 const switchWorkspaceTo = (index) => {
   workspaceEle.replaceChildren(workspaces[index]);
@@ -27,7 +26,9 @@ const setupEventListeners = () => {
     switchWorkspaceTo(1);
   });
 };
-const init = () => {
+const init = async () => {
+  const searchController = await SearchController();
+  workspaces.push(addController.getView(), searchController.getView());
   workspaceEle.appendChild(addController.getView());
   searchBtn.classList.remove('active');
   addBtn.classList.add('active');

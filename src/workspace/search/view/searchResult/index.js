@@ -2,6 +2,7 @@ import './style.css';
 import ExportIconSrc from './images/export.svg';
 import EditIconSrc from './images/edit.svg';
 import DeleteIconSrc from './images/delete.svg';
+import { getLatestStudents } from '../../../../utils';
 
 const SearchResultHeader = () => {
   const searchResultHeaderEle = document.createElement('div');
@@ -87,19 +88,24 @@ const Result = (resultInfo) => {
   return resultEle;
 };
 
-const Results = () => {
+const Results = (arr) => {
   const resultsEle = document.createElement('div');
   resultsEle.classList.add('results');
-
-  resultsEle.append(Result('resultInfo'), Result('resultInfo1'));
+  for (let entry of arr) {
+    console.log(entry);
+    const name = entry.firstName + ' ' + entry.lastName;
+    resultsEle.appendChild(Result(name));
+  }
 
   return resultsEle;
 };
 
-const SearchResult = () => {
+const SearchResult = async () => {
   const searchResultEle = document.createElement('div');
   searchResultEle.classList.add('search-result');
-  searchResultEle.append(SearchResultHeader(), Results());
+  const latestStudents = await getLatestStudents();
+  console.log(latestStudents);
+  searchResultEle.append(SearchResultHeader(), Results(latestStudents));
   return searchResultEle;
 };
 

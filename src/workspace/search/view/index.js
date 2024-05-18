@@ -1,10 +1,11 @@
 import SearchRegion from './searchRegion';
 import SearchResult from './searchResult';
 
-const SearchView = () => {
+const SearchView = async () => {
   const searchView = document.createElement('div');
   searchView.classList.add('search-view');
-  searchView.append(SearchRegion(), SearchResult());
+  const searchResult = await SearchResult();
+  searchView.append(SearchRegion(), searchResult);
 
   return searchView;
 };
