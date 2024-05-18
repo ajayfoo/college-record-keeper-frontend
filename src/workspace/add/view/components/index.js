@@ -12,7 +12,7 @@ const AccordionFormItemHeading = (name, showForm) => {
   return component;
 };
 
-const AccordionFormItem = (name, fields) => {
+const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
   const accordionFormItem = document.createElement('div');
   accordionFormItem.classList.add('accordion-form-item');
 
@@ -28,12 +28,14 @@ const AccordionFormItem = (name, fields) => {
     event.preventDefault();
     const data = {};
     fields.forEach((field) => {
-      const input = field.querySelector('input');
+      const input = field.querySelector('.field-input');
       if (input === null) return;
       data[input.name] = input.value;
     });
     console.log(data);
-    postDataForForm(name, data);
+    const response = await postDataForForm(name, data);
+    console.log(response);
+    onSubmit(response);
   });
 
   const heading = AccordionFormItemHeading(name, showForm);

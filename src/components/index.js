@@ -14,15 +14,35 @@ const Field = (name, attributes) => {
   label.setAttribute('for', attributes.id);
 
   const input = document.createElement('input');
+  input.classList.add('field-input');
   setMultipleAttributes(input, attributes);
-  input.name = name.replaceAll(' ', '');
+  if (input.name === '') input.name = name.replaceAll(' ', '');
 
   field.append(label, input);
   return field;
 };
 
+const SelectField = (name, attributes) => {
+  const field = document.createElement('div');
+  field.classList.add('field');
+
+  const label = document.createElement('label');
+  label.textContent = name;
+  label.setAttribute('for', attributes.id);
+
+  const select = document.createElement('select');
+  select.classList.add('field-input');
+  setMultipleAttributes(select, attributes);
+  if (select.name === '') select.name = name.replaceAll(' ', '');
+
+  field.append(label, select);
+  const getInputElement = () => select;
+  const getElement = () => field;
+  return { getElement, getInputElement };
+};
+
 const SubmitMainFormButton = (name, formId) => {
-  const submitBtn = document.createElement('button', () => {});
+  const submitBtn = document.createElement('button');
   submitBtn.classList.add('submit-main-form-button');
   submitBtn.textContent = name;
   submitBtn.id = `${formId}-submit`;
@@ -30,4 +50,4 @@ const SubmitMainFormButton = (name, formId) => {
   return submitBtn;
 };
 
-export { Field, SubmitMainFormButton };
+export { Field, SelectField, SubmitMainFormButton };

@@ -3,6 +3,18 @@ import { AccordionFormItem } from '../../components';
 
 const AchievementType = () => {
   const ID_PREFIX = 'add-achievement-type-form';
+  const dispatchTypeAddedEvent = (achievementType) => {
+    const newAchievementTypeAddedEvent = new CustomEvent(
+      'newAchievementTypeAdded',
+      {
+        detail: {
+          id: achievementType.id,
+          label: achievementType.label,
+        },
+      },
+    );
+    window.dispatchEvent(newAchievementTypeAddedEvent);
+  };
   const fields = [
     Field('Label', {
       id: `${ID_PREFIX}-label`,
@@ -10,7 +22,7 @@ const AchievementType = () => {
     }),
     SubmitMainFormButton('Add', ID_PREFIX),
   ];
-  return AccordionFormItem('Achievement Type', fields);
+  return AccordionFormItem('Achievement Type', fields, dispatchTypeAddedEvent);
 };
 
 export default AchievementType;
