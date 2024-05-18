@@ -32,6 +32,8 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
       if (input === null) return;
       data[input.name] = input.value;
     });
+    data.Inserted = new Date();
+    data.LastUpdated = new Date();
     console.log(data);
     const response = await postDataForForm(name, data);
     console.log(response);
