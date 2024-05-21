@@ -2,7 +2,11 @@ import './style.css';
 import ExportIconSrc from './images/export.svg';
 import EditIconSrc from './images/edit.svg';
 import DeleteIconSrc from './images/delete.svg';
-import { deleteStudent, getLatestStudents } from '../../../../utils';
+import {
+  deleteStudent,
+  downloadReportPdf,
+  getLatestStudents,
+} from '../../../../utils';
 
 const SearchResultHeader = () => {
   const searchResultHeaderEle = document.createElement('div');
@@ -68,6 +72,9 @@ const Result = (resultInfo) => {
   const exportIcon = document.createElement('img');
   exportIcon.src = ExportIconSrc;
   exportBtn.appendChild(exportIcon);
+  exportBtn.addEventListener('click', async () => {
+    await downloadReportPdf(resultInfo.id);
+  });
 
   const editBtn = document.createElement('button');
   editBtn.classList.add('edit');

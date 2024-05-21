@@ -39,9 +39,25 @@ const deleteStudent = async (id) => {
   });
   return response.ok;
 };
+
+const downloadReportPdf = async (id) => {
+  const response = await fetch(
+    process.env.BACKEND_URL + '/student/report/' + id,
+    {
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
+  if (!response.ok) throw new Error(response.statusText);
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  console.log(url);
+  window.location.assign(url);
+};
 export {
   getHttpEndpointForForm,
   postDataForForm,
   getLatestStudents,
   deleteStudent,
+  downloadReportPdf,
 };
