@@ -58,7 +58,7 @@ const Result = (resultInfo) => {
 
   const selectCheckbox = document.createElement('input');
   selectCheckbox.type = 'checkbox';
-  selectCheckbox.id = 'select-result-someuniquehash';
+  selectCheckbox.id = 'select-result-' + window.crypto.randomUUID();
 
   const resultInfoEle = document.createElement('p');
   resultInfoEle.classList.add('result-info');

@@ -51,8 +51,11 @@ const downloadReportPdf = async (id) => {
   if (!response.ok) throw new Error(response.statusText);
   const blob = await response.blob();
   const url = window.URL.createObjectURL(blob);
+  const anchorEle = document.createElement('a');
+  anchorEle.href = url;
+  anchorEle.download = 'hello.pdf';
+  anchorEle.click();
   console.log(url);
-  window.location.assign(url);
 };
 export {
   getHttpEndpointForForm,
