@@ -32,4 +32,16 @@ const getLatestStudents = async () => {
   return response.json();
 };
 
-export { getHttpEndpointForForm, postDataForForm, getLatestStudents };
+const deleteStudent = async (id) => {
+  const response = await fetch(process.env.BACKEND_URL + '/student/' + id, {
+    method: 'DELETE',
+    mode: 'cors',
+  });
+  return response.ok;
+};
+export {
+  getHttpEndpointForForm,
+  postDataForForm,
+  getLatestStudents,
+  deleteStudent,
+};

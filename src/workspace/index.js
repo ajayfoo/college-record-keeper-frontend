@@ -30,9 +30,8 @@ const init = async () => {
   const searchController = await SearchController();
   workspaces.push(addController.getView(), searchController.getView());
   workspaceEle.appendChild(addController.getView());
-  searchBtn.classList.remove('active');
-  addBtn.classList.add('active');
   setupEventListeners();
+  searchBtn.click();
 };
 
 export default init;

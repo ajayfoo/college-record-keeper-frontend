@@ -2,7 +2,7 @@ import './style.css';
 import ExportIconSrc from './images/export.svg';
 import EditIconSrc from './images/edit.svg';
 import DeleteIconSrc from './images/delete.svg';
-import { getLatestStudents } from '../../../../utils';
+import { deleteStudent, getLatestStudents } from '../../../../utils';
 
 const SearchResultHeader = () => {
   const searchResultHeaderEle = document.createElement('div');
@@ -58,7 +58,7 @@ const Result = (resultInfo) => {
 
   const resultInfoEle = document.createElement('p');
   resultInfoEle.classList.add('result-info');
-  resultInfoEle.textContent = resultInfo;
+  resultInfoEle.textContent = resultInfo.firstName + ' ' + resultInfo.lastName;
 
   const actionButtons = document.createElement('div');
   actionButtons.classList.add('action-buttons');
@@ -79,6 +79,10 @@ const Result = (resultInfo) => {
   deleteBtn.classList.add('delete');
   const deleteIcon = document.createElement('img');
   deleteIcon.src = DeleteIconSrc;
+  deleteBtn.addEventListener('click', async () => {
+    const response = await deleteStudent(resultInfo.id);
+    console.log(response);
+  });
   deleteBtn.appendChild(deleteIcon);
 
   actionButtons.append(exportBtn, editBtn, deleteBtn);
@@ -93,8 +97,7 @@ const Results = (arr) => {
   resultsEle.classList.add('results');
   for (let entry of arr) {
     console.log(entry);
-    const name = entry.firstName + ' ' + entry.lastName;
-    resultsEle.appendChild(Result(name));
+    resultsEle.appendChild(Result(entry));
   }
 
   return resultsEle;
