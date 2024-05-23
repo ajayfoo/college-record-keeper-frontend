@@ -9,8 +9,10 @@ const config = {
     workspace: './src/index.js',
     login: './src/login/index.js',
   },
+  devtool: 'inline-source-map',
   output: {
     path: resolve(import.meta.dirname, 'dist'),
+    clean: true,
   },
   devServer: {
     open: false,
@@ -18,15 +20,15 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'workspace.html',
-      template: './src/templates/workspace.html',
+      filename: 'index.html',
+      template: './src/templates/index.html',
       chunks: ['workspace'],
     }),
-    new HtmlWebpackPlugin({
-      filename: 'login.html',
-      template: './src/templates/login.html',
-      chunks: ['login'],
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'login.html',
+    //   template: './src/templates/login.html',
+    //   chunks: ['login'],
+    // }),
     new DotenvWebpackPlugin(),
   ],
   module: {

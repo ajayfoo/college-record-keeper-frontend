@@ -23,7 +23,13 @@ const postDataForForm = async (name, data) => {
   });
   return response.json();
 };
-
+const canGetLatestStudents = async () => {
+  const response = await fetch(process.env.BACKEND_URL + '/student/latests', {
+    method: 'GET',
+    mode: 'cors',
+  });
+  return response.ok;
+};
 const getLatestStudents = async () => {
   const response = await fetch(process.env.BACKEND_URL + '/student/latests', {
     method: 'GET',
@@ -60,4 +66,5 @@ export {
   getLatestStudents,
   deleteStudent,
   downloadReportPdf,
+  canGetLatestStudents,
 };
