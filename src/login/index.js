@@ -5,6 +5,7 @@ const login = async (data, url) => {
   const response = await fetch(url, {
     method: 'POST',
     mode: 'cors',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -52,7 +53,6 @@ const getLoginContainer = () => {
       if (input === null) return;
       data[input.name] = input.value;
     });
-    console.log(data);
     const json = await login(data, LOGIN_URL);
     console.log(json);
   });

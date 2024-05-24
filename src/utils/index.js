@@ -32,6 +32,7 @@ const canGetLatestStudents = async () => {
 };
 const getLatestStudents = async () => {
   const response = await fetch(process.env.BACKEND_URL + '/student/latests', {
+    credentials: 'include',
     method: 'GET',
     mode: 'cors',
   });
