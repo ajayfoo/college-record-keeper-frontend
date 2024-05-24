@@ -5,10 +5,7 @@ import DotenvWebpackPlugin from 'dotenv-webpack';
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = 'style-loader';
 const config = {
-  entry: {
-    workspace: './src/index.js',
-    login: './src/login/index.js',
-  },
+  entry: './src/index.js',
   devtool: 'inline-source-map',
   output: {
     path: resolve(import.meta.dirname, 'dist'),
@@ -20,9 +17,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/templates/index.html',
-      chunks: ['workspace'],
+      title: 'CRK',
     }),
     // new HtmlWebpackPlugin({
     //   filename: 'login.html',

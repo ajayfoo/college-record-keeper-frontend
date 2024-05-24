@@ -17,6 +17,7 @@ const login = async (data, url) => {
 const getLoginError = () => {
   const loginError = document.createElement('p');
   loginError.classList.add('login-error');
+  loginError.textContent = 'placeholder';
 
   return loginError;
 };
@@ -71,10 +72,10 @@ const getLoginContainer = (startWorkspace) => {
       loginError.classList.remove('shown');
       startWorkspace();
     } else {
-      loginError.classList.add('shown');
       loginError.textContent = window.navigator.onLine
         ? 'Invalid Credentials'
         : "Can't access the Internet";
+      loginError.classList.add('shown');
     }
   });
 

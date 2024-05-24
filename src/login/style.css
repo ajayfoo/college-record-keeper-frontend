@@ -31,7 +31,7 @@
   color: var(--error);
   text-align: center;
   margin: 1em 0;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .login-box .login-error.shown {
   visibility: visible;
