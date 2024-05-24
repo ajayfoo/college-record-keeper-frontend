@@ -85,3 +85,22 @@ main {
   border-radius: 0 0 15px 0;
   box-shadow: 15px 0 0 0 var(--surface-container);
 }
+
+.workspace-container .logout {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 0;
+  background-color: unset;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.workspace-container .logout > img {
+  width: 60%;
+  height: 60%;
+}
+.workspace-container .logout > span {
+  font-size: 1.25rem;
+}

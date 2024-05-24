@@ -1,6 +1,7 @@
 import './style.css';
 import AddController from './add';
 import SearchController from './search';
+import LogoutIconSrc from './images/logout.svg';
 
 const getNavBar = (switchWorkspaceTo) => {
   const nav = document.createElement('nav');
@@ -43,6 +44,18 @@ const getNavBar = (switchWorkspaceTo) => {
   return nav;
 };
 
+const getLogoutButton = () => {
+  const element = document.createElement('button');
+  element.classList.add('logout');
+  const icon = document.createElement('img');
+  icon.src = LogoutIconSrc;
+
+  const text = document.createElement('span');
+  text.textContent = 'Logout';
+  element.append(icon, text);
+  return element;
+};
+
 const getWorkspaceContainer = async () => {
   const container = document.createElement('div');
   container.classList.add('workspace-container');
@@ -58,7 +71,7 @@ const getWorkspaceContainer = async () => {
   const searchController = await SearchController();
   workspaces.push(addController.getView(), searchController.getView());
   main.appendChild(addController.getView());
-  container.append(getNavBar(switchWorkspaceTo), main);
+  container.append(getNavBar(switchWorkspaceTo), main, getLogoutButton());
   return container;
 };
 

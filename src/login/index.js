@@ -15,11 +15,34 @@ const login = async (data, url) => {
 };
 
 const getLoginError = () => {
-  const loginError = document.createElement('p');
-  loginError.classList.add('login-error');
-  loginError.textContent = 'placeholder';
+  const element = document.createElement('p');
+  element.classList.add('login-error');
+  element.textContent = 'placeholder';
 
-  return loginError;
+  const getElement = () => element;
+  const show = () => element.classList.add('shown');
+  const hide = () => element.classList.remove('shown');
+  const showCantAccessInternet = () => {
+    element.textContent = "Can't access the Internet";
+    show();
+  };
+  const showInvalidCredentials = () => {
+    element.textContent = 'Invalid Credentials';
+    show();
+  };
+
+  const showSomethingWentWrong = () => {
+    element.textContent = 'Something went wrong';
+    show();
+  };
+
+  return {
+    getElement,
+    showCantAccessInternet,
+    showInvalidCredentials,
+    hide,
+    showSomethingWentWrong,
+  };
 };
 
 const getLoginContainer = (startWorkspace) => {
@@ -56,7 +79,7 @@ const getLoginContainer = (startWorkspace) => {
   fields.forEach((field) => form.append(field));
 
   const loginError = getLoginError();
-  form.append(loginError);
+  form.append(loginError.getElement());
   form.append(SubmitMainFormButton('Login', formId));
 
   form.addEventListener('submit', async (event) => {
@@ -67,15 +90,19 @@ const getLoginContainer = (startWorkspace) => {
       if (input === null) return;
       data[input.name] = input.value;
     });
-    const response = await login(data, LOGIN_URL);
-    if (response.ok) {
-      loginError.classList.remove('shown');
-      startWorkspace();
-    } else {
-      loginError.textContent = window.navigator.onLine
-        ? 'Invalid Credentials'
-        : "Can't access the Internet";
-      loginError.classList.add('shown');
+    try {
+      const response = await login(data, LOGIN_URL);
+      if (response.ok) {
+        loginError.hide();
+        startWorkspace();
+      } else {
+        loginError.showInvalidCredentials();
+      }
+    } catch (err) {
+      window.navigator.onLine
+        ? loginError.showSomethingWentWrong()
+        : loginError.showCantAccessInternet();
+      console.log(err);
     }
   });
 
