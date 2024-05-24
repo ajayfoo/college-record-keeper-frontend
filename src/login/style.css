@@ -25,3 +25,14 @@
   display: block;
   margin: 0 auto;
 }
+
+.login-box .login-error {
+  font-size: 1.2rem;
+  color: var(--error);
+  text-align: center;
+  margin: 1em 0;
+  /* visibility: hidden; */
+}
+.login-box .login-error.shown {
+  visibility: visible;
+}

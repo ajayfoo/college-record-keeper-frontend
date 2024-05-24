@@ -1,5 +1,4 @@
 import { Field, SubmitMainFormButton } from '../components';
-import getWorkspaceContainer from '../workspace';
 import './style.css';
 
 const login = async (data, url) => {
@@ -14,8 +13,12 @@ const login = async (data, url) => {
   });
   return response;
 };
-const showRetry = () => {
-  console.log('retry');
+
+const getLoginError = () => {
+  const loginError = document.createElement('p');
+  loginError.classList.add('login-error');
+
+  return loginError;
 };
 
 const getLoginContainer = (startWorkspace) => {
@@ -51,6 +54,8 @@ const getLoginContainer = (startWorkspace) => {
 
   fields.forEach((field) => form.append(field));
 
+  const loginError = getLoginError();
+  form.append(loginError);
   form.append(SubmitMainFormButton('Login', formId));
 
   form.addEventListener('submit', async (event) => {
@@ -63,9 +68,13 @@ const getLoginContainer = (startWorkspace) => {
     });
     const response = await login(data, LOGIN_URL);
     if (response.ok) {
+      loginError.classList.remove('shown');
       startWorkspace();
     } else {
-      showRetry();
+      loginError.classList.add('shown');
+      loginError.textContent = window.navigator.onLine
+        ? 'Invalid Credentials'
+        : "Can't access the Internet";
     }
   });
 
