@@ -1,4 +1,5 @@
 import { Field, SubmitMainFormButton } from '../components';
+import getWorkspaceContainer from '../workspace';
 import './style.css';
 
 const login = async (data, url) => {
@@ -13,10 +14,17 @@ const login = async (data, url) => {
   });
   return response;
 };
+const showRetry = () => {
+  console.log('retry');
+};
 
-const getLoginContainer = () => {
+const getLoginContainer = (startWorkspace) => {
   const container = document.createElement('div');
   container.classList.add('login-container');
+
+  const box = document.createElement('div');
+  box.classList.add('login-box');
+
   const LOGIN_URL = process.env.BACKEND_URL + '/login?useCookies=true';
   const form = document.createElement('form');
   form.id = 'login-form';
@@ -53,11 +61,16 @@ const getLoginContainer = () => {
       if (input === null) return;
       data[input.name] = input.value;
     });
-    const json = await login(data, LOGIN_URL);
-    console.log(json);
+    const response = await login(data, LOGIN_URL);
+    if (response.ok) {
+      startWorkspace();
+    } else {
+      showRetry();
+    }
   });
 
-  container.append(form);
+  box.append(form);
+  container.append(box);
   return container;
 };
 

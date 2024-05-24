@@ -3,31 +3,21 @@ import './style.css';
 import { canGetLatestStudents } from './utils';
 import getLoginContainer from './login';
 
-function cookieExists(name) {
-  console.log(document.cookie + ' is cookie');
-  return document.cookie
-    .split(';')
-    .some((item) => item.trim().startsWith(name + '='));
-}
-
-const userIsAuthorized = async () => {
-  console.log(cookieExists('main') + ' cookie?');
-  if (!cookieExists('main')) return false;
-  return canGetLatestStudents();
-};
-
 const launchApp = async () => {
+  const startWorkspace = async () => {
+    const workspaceContainer = await getWorkspaceContainer();
+    document.body.replaceChildren(workspaceContainer);
+  };
   try {
-    const authorized = await userIsAuthorized();
+    const authorized = await canGetLatestStudents();
     console.log(authorized);
-    if (true) {
-      const workspaceContainer = await getWorkspaceContainer();
-      document.body.replaceChildren(workspaceContainer);
+    if (authorized) {
+      await startWorkspace();
     } else {
       throw new Error('Not authorized');
     }
   } catch (err) {
-    document.body.replaceChildren(getLoginContainer());
+    document.body.replaceChildren(getLoginContainer(startWorkspace));
   }
 };
 

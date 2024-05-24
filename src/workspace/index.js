@@ -2,38 +2,6 @@ import './style.css';
 import AddController from './add';
 import SearchController from './search';
 
-// const addBtn = document.getElementById('go-to-add');
-// const searchBtn = document.getElementById('go-to-search');
-//
-// const addController = AddController();
-// const workspaceEle = document.getElementById('workspace');
-//
-// const workspaces = [];
-//
-// const switchWorkspaceTo = (index) => {
-//   workspaceEle.replaceChildren(workspaces[index]);
-// };
-//
-// const setupEventListeners = () => {
-//   addBtn.addEventListener('click', () => {
-//     searchBtn.classList.remove('active');
-//     addBtn.classList.add('active');
-//     switchWorkspaceTo(0);
-//   });
-//   searchBtn.addEventListener('click', () => {
-//     addBtn.classList.remove('active');
-//     searchBtn.classList.add('active');
-//     switchWorkspaceTo(1);
-//   });
-// };
-// const init = async () => {
-//   const searchController = await SearchController();
-//   workspaces.push(addController.getView(), searchController.getView());
-//   workspaceEle.appendChild(addController.getView());
-//   setupEventListeners();
-//   searchBtn.click();
-// };
-
 const getNavBar = (switchWorkspaceTo) => {
   const nav = document.createElement('nav');
 
@@ -47,8 +15,9 @@ const getNavBar = (switchWorkspaceTo) => {
   const addBtn = document.createElement('button');
   addBtn.textContent = 'Add';
   addBtn.addEventListener('click', () => {
-    searchBtn.classList.remove('active');
-    addBtn.classList.add('active');
+    console.log('addbtn');
+    searchEnfold.classList.remove('active');
+    addEnfold.classList.add('active');
     switchWorkspaceTo(0);
   });
 
@@ -61,10 +30,11 @@ const getNavBar = (switchWorkspaceTo) => {
   const searchBtn = document.createElement('button');
   searchBtn.textContent = 'Search';
   searchBtn.addEventListener('click', () => {
-    addBtn.classList.remove('active');
-    searchBtn.classList.add('active');
+    addEnfold.classList.remove('active');
+    searchEnfold.classList.add('active');
     switchWorkspaceTo(1);
   });
+  searchBtn.click();
 
   searchEnfold.appendChild(searchBtn);
 

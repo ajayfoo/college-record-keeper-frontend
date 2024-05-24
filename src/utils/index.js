@@ -25,6 +25,7 @@ const postDataForForm = async (name, data) => {
 };
 const canGetLatestStudents = async () => {
   const response = await fetch(process.env.BACKEND_URL + '/student/latests', {
+    credentials: 'include',
     method: 'GET',
     mode: 'cors',
   });
