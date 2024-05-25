@@ -14,6 +14,7 @@ const getHttpEndpointForForm = (name) => {
 
 const postDataForForm = async (name, data) => {
   const response = await fetch(getHttpEndpointForForm(name), {
+    credentials: 'include',
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -42,6 +43,7 @@ const getLatestStudents = async () => {
 
 const deleteStudent = async (id) => {
   const response = await fetch(process.env.BACKEND_URL + '/student/' + id, {
+    credentials: 'include',
     method: 'DELETE',
     mode: 'cors',
   });
@@ -52,6 +54,7 @@ const downloadReportPdf = async (id) => {
   const response = await fetch(
     process.env.BACKEND_URL + '/student/report/' + id,
     {
+      credentials: 'include',
       method: 'GET',
       mode: 'cors',
     },

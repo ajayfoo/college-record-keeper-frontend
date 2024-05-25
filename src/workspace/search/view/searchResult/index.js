@@ -99,13 +99,24 @@ const Result = (resultInfo) => {
   return resultEle;
 };
 
-const Results = (arr) => {
+const Results = async () => {
   const resultsEle = document.createElement('div');
   resultsEle.classList.add('results');
-  for (let entry of arr) {
-    console.log(entry);
-    resultsEle.appendChild(Result(entry));
-  }
+
+  const refresh = async () => {
+    const latestStudents = await getLatestStudents();
+    const resultArr = [];
+    for (let student of latestStudents) {
+      resultArr.push(Result(student));
+    }
+    resultsEle.replaceChildren(...resultArr);
+  };
+
+  window.addEventListener('newStudentBioAdded', async () => {
+    console.log('newStudentBioAdded');
+    await refresh();
+  });
+  await refresh();
 
   return resultsEle;
 };
@@ -113,9 +124,8 @@ const Results = (arr) => {
 const SearchResult = async () => {
   const searchResultEle = document.createElement('div');
   searchResultEle.classList.add('search-result');
-  const latestStudents = await getLatestStudents();
-  console.log(latestStudents);
-  searchResultEle.append(SearchResultHeader(), Results(latestStudents));
+  const resultsEle = await Results();
+  searchResultEle.append(SearchResultHeader(), resultsEle);
   return searchResultEle;
 };
 

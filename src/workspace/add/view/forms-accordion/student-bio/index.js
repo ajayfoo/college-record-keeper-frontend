@@ -6,6 +6,10 @@ import './style.css';
 const StudentBio = () => {
   const ID_PREFIX = 'add-student-bio-form';
 
+  const dispatchNewStudentBioAddedEvent = () => {
+    const newStudentBioAddedEvent = new CustomEvent('newStudentBioAdded');
+    window.dispatchEvent(newStudentBioAddedEvent);
+  };
   const fields = [
     Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
@@ -63,9 +67,13 @@ const StudentBio = () => {
       max: '2090',
       step: 1,
     }),
-    SubmitMainFormButton('Add', `${ID_PREFIX}-submit`, () => {}),
+    SubmitMainFormButton('Add', `${ID_PREFIX}-submit`),
   ];
-  return AccordionFormItem('Student Bio', fields);
+  return AccordionFormItem(
+    'Student Bio',
+    fields,
+    dispatchNewStudentBioAddedEvent,
+  );
 };
 
 export default StudentBio;
