@@ -16,7 +16,6 @@ const getNavBar = (switchWorkspaceTo) => {
   const addBtn = document.createElement('button');
   addBtn.textContent = 'Add';
   addBtn.addEventListener('click', () => {
-    console.log('addbtn');
     searchEnfold.classList.remove('active');
     addEnfold.classList.add('active');
     switchWorkspaceTo(0);

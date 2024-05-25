@@ -87,8 +87,8 @@ const Result = (resultInfo) => {
   const deleteIcon = document.createElement('img');
   deleteIcon.src = DeleteIconSrc;
   deleteBtn.addEventListener('click', async () => {
-    const response = await deleteStudent(resultInfo.id);
-    console.log(response);
+    await deleteStudent(resultInfo.id);
+    resultEle.remove();
   });
   deleteBtn.appendChild(deleteIcon);
 
