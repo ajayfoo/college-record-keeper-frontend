@@ -44,9 +44,28 @@ const getNavBar = (switchWorkspaceTo) => {
   return nav;
 };
 
+const logout = async () => {
+  const response = await fetch(process.env.BACKEND_URL + '/logout', {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'include',
+  });
+  return response;
+};
+
 const getLogoutButton = () => {
   const element = document.createElement('button');
   element.classList.add('logout');
+  element.addEventListener('click', async () => {
+    const response = await logout();
+    if (response.ok) {
+      alert('Logout successful');
+      location.reload();
+    } else {
+      alert('Logout failed');
+    }
+  });
+
   const icon = document.createElement('img');
   icon.src = LogoutIconSrc;
 
