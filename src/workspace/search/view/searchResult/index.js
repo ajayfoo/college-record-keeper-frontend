@@ -6,6 +6,7 @@ import {
   deleteStudent,
   downloadReportPdf,
   getLatestStudents,
+  getStudentsOfFirstName,
 } from '../../../../utils';
 
 const SearchResultHeader = () => {
@@ -102,20 +103,29 @@ const Result = (resultInfo) => {
 const Results = async () => {
   const resultsEle = document.createElement('div');
   resultsEle.classList.add('results');
-
+  const updateWithStudentsData = (students) => {
+    const resultElements = [];
+    for (let student of students) {
+      resultElements.push(Result(student));
+    }
+    resultsEle.replaceChildren(...resultElements);
+  };
   const refresh = async () => {
     const latestStudents = await getLatestStudents();
-    const resultArr = [];
-    for (let student of latestStudents) {
-      resultArr.push(Result(student));
-    }
-    resultsEle.replaceChildren(...resultArr);
+    updateWithStudentsData(latestStudents);
   };
 
   window.addEventListener('newStudentBioAdded', async () => {
-    console.log('newStudentBioAdded');
     await refresh();
   });
+
+  window.addEventListener('searchStudent', async (event) => {
+    const studentsData = await getStudentsOfFirstName(
+      event.detail.searchString,
+    );
+    updateWithStudentsData(studentsData);
+  });
+
   await refresh();
 
   return resultsEle;

@@ -1,3 +1,4 @@
+import { getYearsOfAdmission } from '../../../../utils';
 import './style.css';
 
 const SearchText = () => {
@@ -12,6 +13,12 @@ const SearchText = () => {
 
   const searchBtn = document.createElement('button');
   searchBtn.textContent = 'Search';
+  searchBtn.addEventListener('click', () => {
+    const searchStudentEvent = new CustomEvent('searchStudent', {
+      detail: { searchString: searchTextBox.value },
+    });
+    window.dispatchEvent(searchStudentEvent);
+  });
 
   searchTextEle.append(searchTextBox, searchBtn);
   return searchTextEle;
@@ -49,20 +56,14 @@ const FilterPlacementStatus = () => {
 
   placementStatusFlags.append(
     placementStatusFieldPlaced,
-    placementStatusFieldNotPlaced
+    placementStatusFieldNotPlaced,
   );
 
   filterPlacementStatusEle.append(placementStatusLabel, placementStatusFlags);
   return filterPlacementStatusEle;
 };
 
-const SearchFilter = () => {
-  const searchFilterEle = document.createElement('div');
-  searchFilterEle.classList.add('search-filter');
-
-  const searchFilterHeading = document.createElement('h3');
-  searchFilterHeading.textContent = 'Filters';
-
+const FilterYearElement = async () => {
   const filterYearEle = document.createElement('div');
   filterYearEle.classList.add('filter-year');
   filterYearEle.classList.add('filter');
@@ -73,25 +74,63 @@ const SearchFilter = () => {
 
   const filterYearSelect = document.createElement('select');
   filterYearSelect.id = 'filter-year-select';
+  const years = await getYearsOfAdmission();
+  console.log(years);
+  years.sort((a, b) => a - b);
+  years.forEach((year) => {
+    const opt = document.createElement('option');
+    opt.textContent = year;
+    opt.value = year;
+    filterYearSelect.appendChild(opt);
+  });
 
-  const filterPlacementStatusEle = FilterPlacementStatus();
+  window.addEventListener('newStudentBioAdded', async (event) => {
+    const newYear = new Date(event.detail.yearOfAdmission).getFullYear();
+    const yearOpts = filterYearSelect.querySelectorAll('option');
+    if (years.includes(newYear)) return;
+    years.push(newYear);
+    const newYearOpt = document.createElement('option');
+    newYearOpt.textContent = newYear;
+    newYearOpt.value = newYear;
+    for (let i = 0; i < yearOpts.length; ++i) {
+      const year = parseInt(yearOpts[i].value);
+      if (newYear < year) {
+        filterYearSelect.insertBefore(newYearOpt, yearOpts[i]);
+        return;
+      }
+    }
+    filterYearSelect.appendChild(newYearOpt);
+  });
 
   filterYearEle.append(filterYearLabel, filterYearSelect);
+
+  return filterYearEle;
+};
+
+const SearchFilter = async () => {
+  const searchFilterEle = document.createElement('div');
+  searchFilterEle.classList.add('search-filter');
+
+  const searchFilterHeading = document.createElement('h3');
+  searchFilterHeading.textContent = 'Filters';
+
+  const filterYearEle = await FilterYearElement();
+  const filterPlacementStatusEle = FilterPlacementStatus();
 
   searchFilterEle.append(
     searchFilterHeading,
     filterYearEle,
-    filterPlacementStatusEle
+    filterPlacementStatusEle,
   );
 
   return searchFilterEle;
 };
 
-const SearchRegion = () => {
+const SearchRegion = async () => {
   const searchRegionEle = document.createElement('div');
   searchRegionEle.classList.add('search-region');
-
-  searchRegionEle.append(SearchText(), SearchFilter());
+  const searchFilter = await SearchFilter();
+  searchRegionEle.append(SearchText(), searchFilter);
   return searchRegionEle;
 };
 

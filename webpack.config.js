@@ -19,11 +19,6 @@ const config = {
     new HtmlWebpackPlugin({
       title: 'CRK',
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'login.html',
-    //   template: './src/templates/login.html',
-    //   chunks: ['login'],
-    // }),
     new DotenvWebpackPlugin(),
   ],
   module: {

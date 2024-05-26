@@ -41,6 +41,28 @@ const getLatestStudents = async () => {
   return response.json();
 };
 
+const getYearsOfAdmission = async () => {
+  const response = await fetch(
+    process.env.BACKEND_URL + '/student/yearsOfAdmission',
+    {
+      credentials: 'include',
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
+  return response.json();
+};
+const getStudentsOfFirstName = async (firstName) => {
+  const response = await fetch(
+    process.env.BACKEND_URL + '/student/find/' + firstName,
+    {
+      credentials: 'include',
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
+  return response.json();
+};
 const deleteStudent = async (id) => {
   const response = await fetch(process.env.BACKEND_URL + '/student/' + id, {
     credentials: 'include',
@@ -72,4 +94,6 @@ export {
   deleteStudent,
   downloadReportPdf,
   canGetLatestStudents,
+  getStudentsOfFirstName,
+  getYearsOfAdmission,
 };

@@ -6,8 +6,10 @@ import './style.css';
 const StudentBio = () => {
   const ID_PREFIX = 'add-student-bio-form';
 
-  const dispatchNewStudentBioAddedEvent = () => {
-    const newStudentBioAddedEvent = new CustomEvent('newStudentBioAdded');
+  const dispatchNewStudentBioAddedEvent = (response) => {
+    const newStudentBioAddedEvent = new CustomEvent('newStudentBioAdded', {
+      detail: { ...response },
+    });
     window.dispatchEvent(newStudentBioAddedEvent);
   };
   const fields = [
