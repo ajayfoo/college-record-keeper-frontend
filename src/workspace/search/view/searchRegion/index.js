@@ -15,7 +15,10 @@ const SearchText = () => {
   searchBtn.textContent = 'Search';
   searchBtn.addEventListener('click', () => {
     const searchStudentEvent = new CustomEvent('searchStudent', {
-      detail: { searchString: searchTextBox.value },
+      detail: {
+        firstName: searchTextBox.value,
+        yearOfAdmission: document.getElementById('filter-year-select').value,
+      },
     });
     window.dispatchEvent(searchStudentEvent);
   });
@@ -74,6 +77,11 @@ const FilterYearElement = async () => {
 
   const filterYearSelect = document.createElement('select');
   filterYearSelect.id = 'filter-year-select';
+  const emptyYear = document.createElement('option');
+  emptyYear.textContent = 'Any';
+  emptyYear.value = 0;
+  emptyYear.selected = true;
+  filterYearSelect.appendChild(emptyYear);
   const years = await getYearsOfAdmission();
   console.log(years);
   years.sort((a, b) => a - b);
@@ -92,7 +100,7 @@ const FilterYearElement = async () => {
     const newYearOpt = document.createElement('option');
     newYearOpt.textContent = newYear;
     newYearOpt.value = newYear;
-    for (let i = 0; i < yearOpts.length; ++i) {
+    for (let i = 1; i < yearOpts.length; ++i) {
       const year = parseInt(yearOpts[i].value);
       if (newYear < year) {
         filterYearSelect.insertBefore(newYearOpt, yearOpts[i]);

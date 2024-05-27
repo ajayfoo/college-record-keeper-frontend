@@ -5,8 +5,8 @@ import DeleteIconSrc from './images/delete.svg';
 import {
   deleteStudent,
   downloadReportPdf,
+  getFilteredStudents,
   getLatestStudents,
-  getStudentsOfFirstName,
 } from '../../../../utils';
 
 const SearchResultHeader = () => {
@@ -120,8 +120,9 @@ const Results = async () => {
   });
 
   window.addEventListener('searchStudent', async (event) => {
-    const studentsData = await getStudentsOfFirstName(
-      event.detail.searchString,
+    const studentsData = await getFilteredStudents(
+      event.detail.firstName,
+      event.detail.yearOfAdmission,
     );
     updateWithStudentsData(studentsData);
   });
