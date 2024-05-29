@@ -85,7 +85,7 @@ const getWorkspaceContainer = async () => {
   const switchWorkspaceTo = (index) => {
     main.replaceChildren(workspaces[index]);
   };
-  const addController = AddController();
+  const addController = await AddController();
   const searchController = await SearchController();
   workspaces.push(addController.getView(), searchController.getView());
   main.appendChild(addController.getView());

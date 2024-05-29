@@ -8,14 +8,17 @@ const Company = () => {
       id: `${ID_PREFIX}-name`,
       minlength: 1,
       maxlength: 150,
+      required: true,
     }),
     Field('Mininum Salary', {
       id: `${ID_PREFIX}-minimum-salary`,
       type: 'number',
+      required: true,
     }),
     Field('Maximum Salary', {
       id: `${ID_PREFIX}-maximum-salary`,
       type: 'number',
+      required: true,
     }),
     Field('Year', {
       id: `${ID_PREFIX}-year`,
@@ -23,6 +26,7 @@ const Company = () => {
       min: '1900',
       max: '2090',
       step: 1,
+      required: true,
     }),
     SubmitMainFormButton('Add', ID_PREFIX, () => {}),
   ];

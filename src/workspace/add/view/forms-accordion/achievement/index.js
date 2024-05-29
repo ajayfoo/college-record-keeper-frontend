@@ -3,16 +3,23 @@ import {
   SelectField,
   SubmitMainFormButton,
 } from '../../../../../components';
+import { getAchievementTypeLabels } from '../../../../../utils';
 
 import { AccordionFormItem } from '../../components';
 
-const Achievement = () => {
+const Achievement = async () => {
   const ID_PREFIX = 'add-achievement-form';
-  const typeEle = SelectField('Type', {
-    id: `${ID_PREFIX}-type`,
-    name: 'AchievementTypeId',
-    required: 'true',
-  });
+  const achievementLabels = await getAchievementTypeLabels();
+  const typeEle = SelectField(
+    'Type',
+    {
+      id: `${ID_PREFIX}-type`,
+      name: 'AchievementTypeId',
+      required: 'true',
+    },
+
+    achievementLabels,
+  );
   window.addEventListener('newAchievementTypeAdded', (event) => {
     const optionEle = document.createElement('option');
     optionEle.value = event.detail.id;
@@ -20,6 +27,7 @@ const Achievement = () => {
     console.log('event was received');
     typeEle.getInputElement().appendChild(optionEle);
   });
+
   const fields = [
     Field('Name', {
       id: `${ID_PREFIX}-name`,

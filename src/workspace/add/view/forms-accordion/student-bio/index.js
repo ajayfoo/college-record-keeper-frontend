@@ -53,7 +53,7 @@ const StudentBio = () => {
       min: 0,
       max: 100,
     }),
-    Field('DOB', {
+    Field('Date Of Birth', {
       id: `${ID_PREFIX}-dob`,
       type: 'date',
       required: 'true',
@@ -63,11 +63,17 @@ const StudentBio = () => {
     }),
     Field('Year Of Admission', {
       id: `${ID_PREFIX}-year-of-admission`,
-      type: 'date',
+      type: 'number',
       required: 'true',
       min: '1900',
       max: '2090',
       step: 1,
+    }),
+    Field('Academic Score', {
+      id: `${ID_PREFIX}-academic-score`,
+      type: 'number',
+      min: '0',
+      max: '100',
     }),
     SubmitMainFormButton('Add', `${ID_PREFIX}-submit`),
   ];

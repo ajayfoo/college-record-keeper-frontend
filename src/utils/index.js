@@ -52,6 +52,19 @@ const getYearsOfAdmission = async () => {
   );
   return response.json();
 };
+
+const getAchievementTypeLabels = async () => {
+  const response = await fetch(
+    process.env.BACKEND_URL + '/AchievementType/labels',
+    {
+      credentials: 'include',
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
+  return response.json();
+};
+
 const getFilteredStudents = async (firstName, yearOfAdmission) => {
   const data = {
     firstName: firstName,
@@ -102,4 +115,5 @@ export {
   canGetLatestStudents,
   getFilteredStudents,
   getYearsOfAdmission,
+  getAchievementTypeLabels,
 };

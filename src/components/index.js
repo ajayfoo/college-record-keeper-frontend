@@ -10,7 +10,7 @@ const Field = (name, attributes) => {
   field.classList.add('field');
 
   const label = document.createElement('label');
-  label.textContent = name;
+  label.textContent = name + (attributes.required ? '*' : '');
   label.setAttribute('for', attributes.id);
 
   const input = document.createElement('input');
@@ -22,18 +22,27 @@ const Field = (name, attributes) => {
   return field;
 };
 
-const SelectField = (name, attributes) => {
+const populateSelectWithArray = (select, arr) => {
+  for (const entry of arr) {
+    const option = document.createElement('option');
+    option.textContent = entry;
+    option.value = entry;
+    select.appendChild(option);
+  }
+};
+const SelectField = (name, attributes, optionArray = []) => {
   const field = document.createElement('div');
   field.classList.add('field');
 
   const label = document.createElement('label');
-  label.textContent = name;
+  label.textContent = name + (attributes.required ? '*' : '');
   label.setAttribute('for', attributes.id);
 
   const select = document.createElement('select');
   select.classList.add('field-input');
   setMultipleAttributes(select, attributes);
   if (select.name === '') select.name = name.replaceAll(' ', '');
+  populateSelectWithArray(select, optionArray);
 
   field.append(label, select);
   const getInputElement = () => select;

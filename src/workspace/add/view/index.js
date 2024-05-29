@@ -1,10 +1,10 @@
 import FormsAccordion from './forms-accordion';
 
-const AddView = () => {
+const AddView = async () => {
   const addView = document.createElement('div');
   addView.classList.add('add-view');
-
-  addView.append(FormsAccordion());
+  const formsAccordian = await FormsAccordion();
+  addView.append(formsAccordian);
   return addView;
 };
 
