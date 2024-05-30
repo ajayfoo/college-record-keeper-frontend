@@ -3,13 +3,17 @@ import {
   SelectField,
   SubmitMainFormButton,
 } from '../../../../../components';
-import { getAchievementTypeLabels } from '../../../../../utils';
+import { getAchievementTypes } from '../../../../../utils';
 
 import { AccordionFormItem } from '../../components';
 
 const Achievement = async () => {
   const ID_PREFIX = 'add-achievement-form';
-  const achievementLabels = await getAchievementTypeLabels();
+  let achievementLabels = await getAchievementTypes();
+  achievementLabels = achievementLabels.map((e) => ({
+    text: e.label,
+    value: e.id,
+  }));
   const typeEle = SelectField(
     'Type',
     {
@@ -25,7 +29,7 @@ const Achievement = async () => {
     optionEle.value = event.detail.id;
     optionEle.textContent = event.detail.label;
     console.log('event was received');
-    typeEle.getInputElement().appendChild(optionEle);
+    typeEle.getSelectElement().appendChild(optionEle);
   });
 
   const fields = [

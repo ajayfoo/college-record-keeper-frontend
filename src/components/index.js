@@ -25,11 +25,12 @@ const Field = (name, attributes) => {
 const populateSelectWithArray = (select, arr) => {
   for (const entry of arr) {
     const option = document.createElement('option');
-    option.textContent = entry;
-    option.value = entry;
+    option.textContent = entry.text;
+    option.value = entry.value;
     select.appendChild(option);
   }
 };
+
 const SelectField = (name, attributes, optionArray = []) => {
   const field = document.createElement('div');
   field.classList.add('field');
@@ -45,9 +46,18 @@ const SelectField = (name, attributes, optionArray = []) => {
   populateSelectWithArray(select, optionArray);
 
   field.append(label, select);
-  const getInputElement = () => select;
+  const getSelectElement = () => select;
   const getElement = () => field;
-  return { getElement, getInputElement };
+  return { getElement, getSelectElement };
+};
+
+const Fieldset = (name, fields) => {
+  const fieldset = document.createElement('fieldset');
+  const legend = document.createElement('legend');
+  legend.textContent = name;
+  fieldset.appendChild(legend);
+  fields.forEach((field) => fieldset.append(field));
+  return fieldset;
 };
 
 const SubmitMainFormButton = (name, formId) => {
@@ -59,4 +69,4 @@ const SubmitMainFormButton = (name, formId) => {
   return submitBtn;
 };
 
-export { Field, SelectField, SubmitMainFormButton };
+export { Field, SelectField, SubmitMainFormButton, Fieldset };
