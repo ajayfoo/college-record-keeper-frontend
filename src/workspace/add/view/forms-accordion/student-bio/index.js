@@ -4,55 +4,63 @@ import {
   SelectField,
   SubmitMainFormButton,
 } from '../../../../../components';
+import {
+  getAchievementTypes,
+  getAchievementLevels,
+  getCompanies,
+} from '../../../../../utils';
 
 import { AccordionFormItem } from '../../components';
 import './style.css';
 
-const AchievementFieldset = (prefix) => {
+const AchievementFieldset = async (prefix) => {
   const ID_PREFIX = prefix + '-achievement';
-  const achievementType = SelectField(
+  const achievementTypes = await getAchievementTypes();
+  const achievementTypeField = SelectField(
     'Type',
     {
       id: `${ID_PREFIX}-achievement-type`,
       type: 'text',
     },
-    [{ text: 'None', value: 'None' }],
+    achievementTypes.map((a) => ({ text: a.label, value: a.id })),
   );
-  const achievementLevel = SelectField(
+  const achievementLevels = await getAchievementLevels();
+  const achievementLevelField = SelectField(
     'Level',
     {
       id: `${ID_PREFIX}-achievement-level`,
       type: 'text',
     },
-    [{ text: 'None', value: 'None' }],
+    achievementLevels.map((a) => ({ text: a.name, value: a.id })),
   );
   const fields = [
     Field('Name', {
-      id: `${ID_PREFIX}-salary`,
+      id: `${ID_PREFIX}-name`,
     }),
-    achievementType.getElement(),
-    achievementLevel.getElement(),
+    achievementTypeField.getElement(),
+    achievementLevelField.getElement(),
 
     Field('Prize', {
-      id: `${ID_PREFIX}-salary`,
+      id: `${ID_PREFIX}-prize`,
     }),
     Field('Date', {
-      id: `${ID_PREFIX}-salary`,
+      id: `${ID_PREFIX}-date`,
       type: 'date',
     }),
   ];
 
   return Fieldset('Achievement', fields);
 };
-const EmploymentFieldset = (prefix) => {
+const EmploymentFieldset = async (prefix) => {
   const ID_PREFIX = prefix + '-employment';
+  const companies = await getCompanies();
   const placedCompanySelect = SelectField(
     'Placed Company',
     {
       id: `${ID_PREFIX}-placed-company`,
       type: 'text',
     },
-    [{ text: 'None', value: 'None' }],
+    companies.map((c) => ({ text: c.name, value: c.id })),
   );
   const fields = [
     placedCompanySelect.getElement(),
@@ -76,7 +84,7 @@ const EmploymentFieldset = (prefix) => {
   return Fieldset('Employment', fields);
 };
 
-const StudentBio = () => {
+const StudentBio = async () => {
   const ID_PREFIX = 'add-student-bio-form';
 
   const dispatchNewStudentBioAddedEvent = (response) => {
@@ -85,6 +93,8 @@ const StudentBio = () => {
     });
     window.dispatchEvent(newStudentBioAddedEvent);
   };
+  const employmentFieldset = await EmploymentFieldset(ID_PREFIX);
+  const achievementFieldset = await AchievementFieldset(ID_PREFIX);
   const fields = [
     Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
@@ -144,8 +154,8 @@ const StudentBio = () => {
       min: '0',
       max: '100',
     }),
-    EmploymentFieldset(ID_PREFIX),
-    AchievementFieldset(ID_PREFIX),
+    achievementFieldset,
+    employmentFieldset,
     SubmitMainFormButton('Add', `${ID_PREFIX}-submit`),
   ];
   return AccordionFormItem(

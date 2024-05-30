@@ -62,6 +62,24 @@ const getAchievementTypes = async () => {
   return response.json();
 };
 
+const getAchievementLevels = async () => {
+  const response = await fetch(process.env.BACKEND_URL + '/achievementLevels', {
+    credentials: 'include',
+    method: 'GET',
+    mode: 'cors',
+  });
+  return response.json();
+};
+
+const getCompanies = async () => {
+  const response = await fetch(process.env.BACKEND_URL + '/companies', {
+    credentials: 'include',
+    method: 'GET',
+    mode: 'cors',
+  });
+  return response.json();
+};
+
 const getFilteredStudents = async (firstName, yearOfAdmission) => {
   const data = {
     firstName: firstName,
@@ -113,4 +131,6 @@ export {
   getFilteredStudents,
   getYearsOfAdmission,
   getAchievementTypes,
+  getAchievementLevels,
+  getCompanies,
 };

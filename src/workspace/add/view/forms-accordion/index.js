@@ -7,13 +7,9 @@ import './style.css';
 const FormsAccordion = async () => {
   const formsAccordion = document.createElement('div');
   formsAccordion.classList.add('forms-accordion');
+  const studentBio = await StudentBio();
   const achievement = await Achievement();
-  formsAccordion.append(
-    StudentBio(),
-    AchievementType(),
-    achievement,
-    Company(),
-  );
+  formsAccordion.append(studentBio, AchievementType(), achievement, Company());
   return formsAccordion;
 };
 
