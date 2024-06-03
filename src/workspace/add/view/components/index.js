@@ -28,17 +28,20 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
     event.preventDefault();
     const data = {};
     const fieldNameValues = Array.from(form.elements)
-      .filter((e) => e.name !== '')
-      .map((e) => ({ name: e.name, value: e.value }));
+      .filter((e) => e.name !== '' && !e.disabled)
+      .map((e) => {
+        if (e.type === 'checkbox') return { name: e.name, value: e.checked };
+        return { name: e.name, value: e.value };
+      });
     fieldNameValues.forEach((nameValue) => {
       strToObj(nameValue.name, nameValue.value, data);
     });
     data.Inserted = new Date();
     data.LastUpdated = new Date();
     console.log(data);
-    // const response = await postDataForForm(name, data);
-    // console.log(response);
-    // onSubmit(response);
+    const response = await postDataForForm(name, data);
+    console.log(response);
+    onSubmit(response);
   });
 
   const heading = AccordionFormItemHeading(name, showForm);

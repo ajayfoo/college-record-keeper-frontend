@@ -18,6 +18,7 @@ const Field = (name, attributes) => {
   setMultipleAttributes(input, attributes);
   if (input.name === '') input.name = name.replaceAll(' ', '');
 
+  field.getInputElement = () => input;
   field.append(label, input);
   return field;
 };
@@ -39,6 +40,7 @@ const Checkbox = (name, attributes, onChange) => {
   setMultipleAttributes(input, attributes);
   if (input.name === '') input.name = name.replaceAll(' ', '');
 
+  checkbox.getInputElement = () => input;
   checkbox.append(input, label);
   return checkbox;
 };
@@ -66,6 +68,7 @@ const SelectField = (name, attributes, optionArray = []) => {
   if (select.name === '') select.name = name.replaceAll(' ', '');
   populateSelectWithArray(select, optionArray);
 
+  field.getInputElement = () => select;
   field.append(label, select);
   const getSelectElement = () => select;
   const getElement = () => field;

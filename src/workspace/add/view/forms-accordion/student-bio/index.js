@@ -16,7 +16,7 @@ import './style.css';
 
 const AchievementFieldset = async (prefix) => {
   const ID_PREFIX = prefix + '-achievement';
-  const NAME_PREFIX = 'achievement.';
+  const NAME_PREFIX = 'achievementDto.';
   const achievementTypes = await getAchievementTypes();
   const achievementTypeField = SelectField(
     'Type',
@@ -65,7 +65,7 @@ const AchievementFieldset = async (prefix) => {
 const EmploymentFieldset = async (prefix) => {
   const ID_PREFIX = prefix + '-employment';
   const companies = await getCompanies();
-  const NAME_PREFIX = 'employment.';
+  const NAME_PREFIX = 'employmentDto.';
   const placedCompanySelect = SelectField(
     'Placed Company',
     {
@@ -79,19 +79,19 @@ const EmploymentFieldset = async (prefix) => {
     'Is Employed',
     {
       id: `${ID_PREFIX}-is-employed`,
-      name: 'IsEmployed',
+      name: NAME_PREFIX + 'IsEmployed',
     },
     (event) => {
       fields.forEach((field) => {
         if (field === isEmployedCheckbox) return;
-        field.style.display = event.target.checked ? 'flex' : 'none';
+        field.getInputElement().disabled = !event.target.checked;
       });
     },
   );
 
-  const hideAllFieldsExceptCheckbox = (fields) => {
+  const disableAllFieldsExceptCheckbox = (fields) => {
     fields.forEach((field) => {
-      field.style.display = field === isEmployedCheckbox ? 'flex' : 'none';
+      field.getInputElement().disabled = field !== isEmployedCheckbox;
     });
   };
 
@@ -120,7 +120,7 @@ const EmploymentFieldset = async (prefix) => {
     }),
   ];
 
-  hideAllFieldsExceptCheckbox(fields);
+  disableAllFieldsExceptCheckbox(fields);
 
   return Fieldset('Employment', fields);
 };
