@@ -27,17 +27,18 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const data = {};
-    fields.forEach((field) => {
-      const input = field.querySelector('.field-input');
-      if (input === null) return;
-      data[input.name] = input.value;
+    const fieldNameValues = Array.from(form.elements)
+      .filter((e) => e.name !== '')
+      .map((e) => ({ name: e.name, value: e.value }));
+    fieldNameValues.forEach((nameValue) => {
+      strToObj(nameValue.name, nameValue.value, data);
     });
     data.Inserted = new Date();
     data.LastUpdated = new Date();
     console.log(data);
-    const response = await postDataForForm(name, data);
-    console.log(response);
-    onSubmit(response);
+    // const response = await postDataForForm(name, data);
+    // console.log(response);
+    // onSubmit(response);
   });
 
   const heading = AccordionFormItemHeading(name, showForm);
@@ -45,5 +46,20 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
   accordionFormItem.append(heading, form);
   return accordionFormItem;
 };
+
+function strToObj(str, value, initialObj) {
+  const arr = str.split('.').reverse();
+  console.log(arr);
+  let obj = initialObj;
+  while (arr.length > 1) {
+    const key = arr.pop();
+    if (obj[key] === undefined) {
+      obj[key] = {};
+    }
+    obj = obj[key];
+  }
+  obj[arr.pop()] = value;
+  return initialObj;
+}
 
 export { AccordionFormItemHeading, AccordionFormItem };

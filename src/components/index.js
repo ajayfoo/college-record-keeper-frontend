@@ -22,6 +22,27 @@ const Field = (name, attributes) => {
   return field;
 };
 
+const Checkbox = (name, attributes, onChange) => {
+  const checkbox = document.createElement('div');
+  checkbox.classList.add('field', 'checkbox');
+
+  const label = document.createElement('label');
+  label.textContent = name + (attributes.required ? '*' : '');
+  label.setAttribute('for', attributes.id);
+
+  const input = document.createElement('input');
+  input.type = 'checkbox';
+  input.classList.add('field-input');
+  input.addEventListener('change', (event) => {
+    onChange(event);
+  });
+  setMultipleAttributes(input, attributes);
+  if (input.name === '') input.name = name.replaceAll(' ', '');
+
+  checkbox.append(input, label);
+  return checkbox;
+};
+
 const populateSelectWithArray = (select, arr) => {
   for (const entry of arr) {
     const option = document.createElement('option');
@@ -69,4 +90,4 @@ const SubmitMainFormButton = (name, formId) => {
   return submitBtn;
 };
 
-export { Field, SelectField, SubmitMainFormButton, Fieldset };
+export { Field, SelectField, SubmitMainFormButton, Fieldset, Checkbox };
