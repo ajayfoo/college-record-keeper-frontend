@@ -50,13 +50,18 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
   return accordionFormItem;
 };
 
+function isNumberStr(numStr) {
+  return !isNaN(parseInt(numStr));
+}
+
 function strToObj(str, value, initialObj) {
   const arr = str.split('.').reverse();
-  console.log(arr);
   let obj = initialObj;
   while (arr.length > 1) {
     const key = arr.pop();
-    if (obj[key] === undefined) {
+    if (obj[key] === undefined && isNumberStr(arr[arr.length - 1])) {
+      obj[key] = [];
+    } else if (obj[key] === undefined) {
       obj[key] = {};
     }
     obj = obj[key];

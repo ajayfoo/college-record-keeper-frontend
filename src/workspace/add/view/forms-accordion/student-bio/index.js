@@ -14,16 +14,20 @@ import {
 import { AccordionFormItem } from '../../components';
 import './style.css';
 
-const AchievementFieldset = async (prefix) => {
+const AchievementFieldset = async (prefix, namePrefix) => {
   const ID_PREFIX = prefix + '-achievement';
-  const NAME_PREFIX = 'achievementDto.';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.textContent = 'X';
+
   const achievementTypes = await getAchievementTypes();
   const achievementTypeField = SelectField(
     'Type',
     {
       id: `${ID_PREFIX}-achievement-type`,
       type: 'text',
-      name: NAME_PREFIX + 'achievementTypeId',
+      name: namePrefix + 'achievementTypeId',
     },
     achievementTypes.map((a) => ({ text: a.label, value: a.id })),
   );
@@ -33,14 +37,15 @@ const AchievementFieldset = async (prefix) => {
     {
       id: `${ID_PREFIX}-achievement-level`,
       type: 'text',
-      name: NAME_PREFIX + 'achievementLevelId',
+      name: namePrefix + 'achievementLevelId',
     },
     achievementLevels.map((a) => ({ text: a.name, value: a.id })),
   );
+
   const fields = [
     Field('Name', {
       id: `${ID_PREFIX}-name`,
-      name: NAME_PREFIX + 'name',
+      name: namePrefix + 'name',
       value: 'Chess Champ',
     }),
     achievementTypeField.getElement(),
@@ -48,18 +53,44 @@ const AchievementFieldset = async (prefix) => {
 
     Field('Prize', {
       id: `${ID_PREFIX}-prize`,
-      name: NAME_PREFIX + 'prize',
+      name: namePrefix + 'prize',
       value: 'Some prize',
     }),
     Field('Date', {
       id: `${ID_PREFIX}-date`,
       type: 'date',
-      name: NAME_PREFIX + 'date',
+      name: namePrefix + 'date',
       value: '2022-10-22',
     }),
   ];
 
   return Fieldset('Achievement', fields);
+};
+
+const AchievementAdder = (idPrefix) => {
+  const element = document.createElement('div');
+
+  const achievements = document.createElement('div');
+  achievements.classList.add('achievements');
+  const heading = document.createElement('h4');
+  heading.textContent = 'Achievements';
+  achievements.appendChild(heading);
+
+  const addBtn = document.createElement('button');
+  addBtn.textContent = 'Add';
+  addBtn.type = 'button';
+  let achievementCount = 0;
+  addBtn.addEventListener('click', async () => {
+    const achievementFieldset = await AchievementFieldset(
+      idPrefix + '-' + achievementCount,
+      'achievementsDto.' + achievementCount + '.',
+    );
+    ++achievementCount;
+    achievements.appendChild(achievementFieldset);
+  });
+
+  element.append(achievements, addBtn);
+  return element;
 };
 
 const EmploymentFieldset = async (prefix) => {
@@ -135,7 +166,8 @@ const StudentBio = async () => {
     window.dispatchEvent(newStudentBioAddedEvent);
   };
   const employmentFieldset = await EmploymentFieldset(ID_PREFIX);
-  const achievementFieldset = await AchievementFieldset(ID_PREFIX);
+  // const achievementFieldset = await AchievementFieldset(ID_PREFIX);
+  const achievementAdder = AchievementAdder(ID_PREFIX);
   const fields = [
     Field('First Name', {
       id: `${ID_PREFIX}-first-name`,
@@ -203,7 +235,7 @@ const StudentBio = async () => {
       max: '100',
       value: 2,
     }),
-    achievementFieldset,
+    achievementAdder,
     employmentFieldset,
     SubmitMainFormButton('Add', `${ID_PREFIX}-submit`),
   ];
