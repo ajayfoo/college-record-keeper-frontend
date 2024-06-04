@@ -14,7 +14,7 @@ import {
 import { AccordionFormItem } from '../../components';
 import './style.css';
 
-const AchievementFieldset = async (prefix, namePrefix) => {
+const AchievementFieldset = async (prefix, namePrefix, legend) => {
   const ID_PREFIX = prefix + '-achievement';
 
   const closeBtn = document.createElement('button');
@@ -64,26 +64,29 @@ const AchievementFieldset = async (prefix, namePrefix) => {
     }),
   ];
 
-  return Fieldset('Achievement', fields);
+  return Fieldset(legend, fields);
 };
 
 const AchievementAdder = (idPrefix) => {
   const element = document.createElement('div');
+  element.classList.add('achievement-adder');
+
+  const heading = document.createElement('h4');
+  heading.textContent = 'Achievements';
+  element.appendChild(heading);
 
   const achievements = document.createElement('div');
   achievements.classList.add('achievements');
-  const heading = document.createElement('h4');
-  heading.textContent = 'Achievements';
-  achievements.appendChild(heading);
 
   const addBtn = document.createElement('button');
-  addBtn.textContent = 'Add';
+  addBtn.textContent = 'Add Achievement';
   addBtn.type = 'button';
   let achievementCount = 0;
   addBtn.addEventListener('click', async () => {
     const achievementFieldset = await AchievementFieldset(
       idPrefix + '-' + achievementCount,
       'achievementsDto.' + achievementCount + '.',
+      'Achievement No.' + (achievementCount + 1),
     );
     ++achievementCount;
     achievements.appendChild(achievementFieldset);
@@ -94,6 +97,14 @@ const AchievementAdder = (idPrefix) => {
 };
 
 const EmploymentFieldset = async (prefix) => {
+  const employmentFieldsEle = document.createElement('div');
+  employmentFieldsEle.classList.add('employment-fields');
+
+  const heading = document.createElement('h4');
+  heading.textContent = 'Employment';
+
+  employmentFieldsEle.appendChild(heading);
+
   const ID_PREFIX = prefix + '-employment';
   const companies = await getCompanies();
   const NAME_PREFIX = 'employmentDto.';
@@ -107,7 +118,7 @@ const EmploymentFieldset = async (prefix) => {
     companies.map((c) => ({ text: c.name, value: c.id })),
   );
   const isEmployedCheckbox = Checkbox(
-    'Is Employed',
+    'Is Employed ?',
     {
       id: `${ID_PREFIX}-is-employed`,
       name: NAME_PREFIX + 'IsEmployed',
@@ -152,8 +163,8 @@ const EmploymentFieldset = async (prefix) => {
   ];
 
   disableAllFieldsExceptCheckbox(fields);
-
-  return Fieldset('Employment', fields);
+  fields.forEach((field) => employmentFieldsEle.appendChild(field));
+  return employmentFieldsEle;
 };
 
 const StudentBio = async () => {

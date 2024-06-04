@@ -1,7 +1,7 @@
 import { Field, SubmitMainFormButton } from '../../../../../components';
 
 import { AccordionFormItem } from '../../components';
-
+import './style.css';
 const StudentAcademicRecord = () => {
   const ID_PREFIX = 'add-student-academic-record-form';
   const fields = [
