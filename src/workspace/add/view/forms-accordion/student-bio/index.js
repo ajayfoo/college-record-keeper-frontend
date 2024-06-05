@@ -1,7 +1,7 @@
 import {
-  Checkbox,
   Field,
   Fieldset,
+  Radio,
   SelectField,
   SubmitMainFormButton,
 } from '../../../../../components';
@@ -20,7 +20,6 @@ const AchievementFieldset = async (prefix, namePrefix, legend) => {
   const closeBtn = document.createElement('button');
   closeBtn.type = 'button';
   closeBtn.textContent = 'X';
-
   const achievementTypes = await getAchievementTypes();
   const achievementTypeField = SelectField(
     'Type',
@@ -64,7 +63,16 @@ const AchievementFieldset = async (prefix, namePrefix, legend) => {
     }),
   ];
 
-  return Fieldset(legend, fields);
+  const fieldset = Fieldset(legend, fields);
+  fieldset.appendChild(closeBtn);
+  closeBtn.addEventListener('click', () => {
+    fieldset.remove();
+    const achievementFieldRemovedEvent = new CustomEvent(
+      'achievementFieldRemoved',
+    );
+    window.dispatchEvent(achievementFieldRemovedEvent);
+  });
+  return fieldset;
 };
 
 const AchievementAdder = (idPrefix) => {
@@ -96,6 +104,47 @@ const AchievementAdder = (idPrefix) => {
   return element;
 };
 
+const IsEmployedRadio = (idPrefix, namePrefix, otherFields) => {
+  const element = document.createElement('div');
+  element.classList.add('field');
+
+  const desc = document.createElement('p');
+  desc.textContent = 'Is employed?';
+
+  const yes = Radio('Yes', {
+    id: idPrefix + '-is-employed',
+    name: namePrefix + 'IsEmployed',
+    required: true,
+    value: true,
+  });
+
+  const no = Radio('No', {
+    id: idPrefix + '-is-no-employed',
+    name: namePrefix + 'IsEmployed',
+    required: true,
+    value: false,
+    checked: true,
+  });
+
+  [yes, no].forEach((radio) =>
+    radio.addEventListener('click', () => {
+      otherFields.forEach((field) => {
+        if (field === element) return;
+        field.getInputElement().disabled =
+          element.querySelector(
+            'input[name="employmentDto.IsEmployed"]:checked',
+          ).value === 'false';
+      });
+    }),
+  );
+  const radios = document.createElement('div');
+  radios.classList.add('radios');
+  radios.append(yes, no);
+
+  element.append(desc, radios);
+  return element;
+};
+
 const EmploymentFieldset = async (prefix) => {
   const employmentFieldsEle = document.createElement('div');
   employmentFieldsEle.classList.add('employment-fields');
@@ -117,28 +166,7 @@ const EmploymentFieldset = async (prefix) => {
     },
     companies.map((c) => ({ text: c.name, value: c.id })),
   );
-  const isEmployedCheckbox = Checkbox(
-    'Is Employed ?',
-    {
-      id: `${ID_PREFIX}-is-employed`,
-      name: NAME_PREFIX + 'IsEmployed',
-    },
-    (event) => {
-      fields.forEach((field) => {
-        if (field === isEmployedCheckbox) return;
-        field.getInputElement().disabled = !event.target.checked;
-      });
-    },
-  );
-
-  const disableAllFieldsExceptCheckbox = (fields) => {
-    fields.forEach((field) => {
-      field.getInputElement().disabled = field !== isEmployedCheckbox;
-    });
-  };
-
   const fields = [
-    isEmployedCheckbox,
     placedCompanySelect.getElement(),
     Field('Salary', {
       id: `${ID_PREFIX}-salary`,
@@ -162,6 +190,15 @@ const EmploymentFieldset = async (prefix) => {
     }),
   ];
 
+  const isEmployedRadios = IsEmployedRadio(ID_PREFIX, NAME_PREFIX, fields);
+  fields.unshift(isEmployedRadios);
+  const disableAllFieldsExceptCheckbox = (fields) => {
+    fields.forEach((field) => {
+      if (field === isEmployedRadios) return;
+      field.getInputElement().disabled = true;
+    });
+  };
+
   disableAllFieldsExceptCheckbox(fields);
   fields.forEach((field) => employmentFieldsEle.appendChild(field));
   return employmentFieldsEle;
@@ -177,7 +214,6 @@ const StudentBio = async () => {
     window.dispatchEvent(newStudentBioAddedEvent);
   };
   const employmentFieldset = await EmploymentFieldset(ID_PREFIX);
-  // const achievementFieldset = await AchievementFieldset(ID_PREFIX);
   const achievementAdder = AchievementAdder(ID_PREFIX);
   const fields = [
     Field('First Name', {
