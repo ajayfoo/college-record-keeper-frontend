@@ -9,6 +9,7 @@ import {
   getAchievementTypes,
   getAchievementLevels,
   getCompanies,
+  makeId,
 } from '../../../../../utils';
 
 import { AccordionFormItem } from '../../components';
@@ -91,13 +92,20 @@ const AchievementAdder = (idPrefix) => {
   addBtn.type = 'button';
   let achievementCount = 0;
   addBtn.addEventListener('click', async () => {
-    const achievementFieldset = await AchievementFieldset(
-      idPrefix + '-' + achievementCount,
-      'achievementsDto.' + achievementCount + '.',
-      'Achievement No.' + (achievementCount + 1),
-    );
     ++achievementCount;
+    const achievementFieldset = await AchievementFieldset(
+      idPrefix + '-' + achievementCount + makeId(3),
+      'achievementsDto.' + achievementCount + '.',
+      'Achievement No.' + achievementCount,
+    );
     achievements.appendChild(achievementFieldset);
+  });
+  window.addEventListener('achievementFieldRemoved', () => {
+    --achievementCount;
+    const legends = achievements.querySelectorAll('fieldset>legend');
+    for (let i = 0; i < legends.length; ++i) {
+      legends[i].textContent = 'Achievement No.' + (i + 1);
+    }
   });
 
   element.append(achievements, addBtn);
