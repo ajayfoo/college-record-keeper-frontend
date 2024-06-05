@@ -21,3 +21,21 @@
   display: block;
   margin: 0 auto;
 }
+
+.is-employed > .radios > input[type='radio'] {
+  appearance: none;
+  padding: 0.2em 0.4em;
+  border-radius: 0.5em;
+  font-family: inherit;
+  font-size: inherit;
+}
+.is-employed > .radios > input[type='radio']:first-child:after {
+  content: 'Yes';
+}
+.is-employed > .radios > input[type='radio']:last-child:after {
+  content: 'No';
+}
+.is-employed > .radios > input[type='radio']:checked {
+  background-color: var(--tertiary);
+  color: var(--on-tertiary);
+}

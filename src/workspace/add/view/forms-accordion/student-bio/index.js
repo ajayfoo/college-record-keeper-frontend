@@ -106,24 +106,26 @@ const AchievementAdder = (idPrefix) => {
 
 const IsEmployedRadio = (idPrefix, namePrefix, otherFields) => {
   const element = document.createElement('div');
-  element.classList.add('field');
+  element.classList.add('field', 'is-employed');
 
   const desc = document.createElement('p');
   desc.textContent = 'Is employed?';
 
-  const yes = Radio('Yes', {
+  const yes = Radio({
     id: idPrefix + '-is-employed',
     name: namePrefix + 'IsEmployed',
     required: true,
     value: true,
+    'aria-label': 'yes',
   });
 
-  const no = Radio('No', {
+  const no = Radio({
     id: idPrefix + '-is-no-employed',
     name: namePrefix + 'IsEmployed',
     required: true,
     value: false,
     checked: true,
+    'aria-label': 'no',
   });
 
   [yes, no].forEach((radio) =>

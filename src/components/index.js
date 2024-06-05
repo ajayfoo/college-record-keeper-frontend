@@ -93,18 +93,12 @@ const SubmitMainFormButton = (name, formId) => {
   return submitBtn;
 };
 
-const Radio = (labelTxt, attributes) => {
-  const element = document.createElement('div');
-
-  const label = document.createElement('label');
-  label.textContent = labelTxt;
-
+const Radio = (attributes) => {
   const radio = document.createElement('input');
   radio.type = 'radio';
   setMultipleAttributes(radio, attributes);
 
-  element.append(label, radio);
-  return element;
+  return radio;
 };
 
 export { Field, SelectField, SubmitMainFormButton, Fieldset, Checkbox, Radio };
