@@ -135,6 +135,11 @@ function makeId(length) {
   return result;
 }
 
+function stringBeforeNumbers(str) {
+  const index = str.search(/\d/);
+  return str.substring(0, index);
+}
+
 export {
   getHttpEndpointForForm,
   postDataForForm,
@@ -148,4 +153,5 @@ export {
   getAchievementLevels,
   getCompanies,
   makeId,
+  stringBeforeNumbers,
 };

@@ -10,22 +10,22 @@ import {
   getAchievementLevels,
   getCompanies,
   makeId,
+  stringBeforeNumbers,
 } from '../../../../../utils';
 
 import { AccordionFormItem } from '../../components';
 import './style.css';
 
-const AchievementFieldset = async (prefix, namePrefix, legend) => {
-  const ID_PREFIX = prefix + '-achievement';
-
+const AchievementFieldset = async (idPrefix, namePrefix, legend) => {
   const closeBtn = document.createElement('button');
   closeBtn.type = 'button';
   closeBtn.textContent = 'X';
+  closeBtn.classList.add('close');
   const achievementTypes = await getAchievementTypes();
   const achievementTypeField = SelectField(
     'Type',
     {
-      id: `${ID_PREFIX}-achievement-type`,
+      id: `${idPrefix}-type`,
       type: 'text',
       name: namePrefix + 'achievementTypeId',
     },
@@ -35,7 +35,7 @@ const AchievementFieldset = async (prefix, namePrefix, legend) => {
   const achievementLevelField = SelectField(
     'Level',
     {
-      id: `${ID_PREFIX}-achievement-level`,
+      id: `${idPrefix}-level`,
       type: 'text',
       name: namePrefix + 'achievementLevelId',
     },
@@ -44,7 +44,7 @@ const AchievementFieldset = async (prefix, namePrefix, legend) => {
 
   const fields = [
     Field('Name', {
-      id: `${ID_PREFIX}-name`,
+      id: `${idPrefix}-name`,
       name: namePrefix + 'name',
       value: 'Chess Champ',
     }),
@@ -52,28 +52,46 @@ const AchievementFieldset = async (prefix, namePrefix, legend) => {
     achievementLevelField.getElement(),
 
     Field('Prize', {
-      id: `${ID_PREFIX}-prize`,
+      id: `${idPrefix}-prize`,
       name: namePrefix + 'prize',
       value: 'Some prize',
     }),
     Field('Date', {
-      id: `${ID_PREFIX}-date`,
+      id: `${idPrefix}-date`,
       type: 'date',
       name: namePrefix + 'date',
       value: '2022-10-22',
     }),
   ];
 
+  const updateNames = (num) => {
+    const nameField = fields[0].querySelector('input');
+    const achievementType = fields[1].querySelector('select');
+    const achievementLevel = fields[2].querySelector('select');
+    const prize = fields[3].querySelector('input');
+    const date = fields[4].querySelector('input');
+    const namePrefixWithoutNum = stringBeforeNumbers(namePrefix) + num + '.';
+
+    nameField.name = namePrefixWithoutNum + 'name';
+    achievementType.name = namePrefixWithoutNum + 'type';
+    achievementLevel.name = namePrefixWithoutNum + 'level';
+    prize.name = namePrefixWithoutNum + 'prize';
+    date.name = namePrefixWithoutNum + 'date';
+  };
+
   const fieldset = Fieldset(legend, fields);
   fieldset.appendChild(closeBtn);
+  fieldset.id = idPrefix;
   closeBtn.addEventListener('click', () => {
     fieldset.remove();
     const achievementFieldRemovedEvent = new CustomEvent(
       'achievementFieldRemoved',
+      { detail: { id: idPrefix } },
     );
     window.dispatchEvent(achievementFieldRemovedEvent);
   });
-  return fieldset;
+  const getElement = () => fieldset;
+  return { getElement, updateNames };
 };
 
 const AchievementAdder = (idPrefix) => {
@@ -87,25 +105,35 @@ const AchievementAdder = (idPrefix) => {
   const achievements = document.createElement('div');
   achievements.classList.add('achievements');
 
+  const achievementMap = {};
+
   const addBtn = document.createElement('button');
   addBtn.textContent = 'Add Achievement';
   addBtn.type = 'button';
   let achievementCount = 0;
   addBtn.addEventListener('click', async () => {
-    ++achievementCount;
+    const newIdPrefix = idPrefix + '-' + makeId(3) + '-achievement';
     const achievementFieldset = await AchievementFieldset(
-      idPrefix + '-' + achievementCount + makeId(3),
+      newIdPrefix,
       'achievementsDto.' + achievementCount + '.',
-      'Achievement No.' + achievementCount,
+      'Achievement No.' + (achievementCount + 1),
     );
-    achievements.appendChild(achievementFieldset);
+    ++achievementCount;
+    achievements.appendChild(achievementFieldset.getElement());
+    achievementMap[newIdPrefix] = achievementFieldset;
   });
-  window.addEventListener('achievementFieldRemoved', () => {
-    --achievementCount;
-    const legends = achievements.querySelectorAll('fieldset>legend');
-    for (let i = 0; i < legends.length; ++i) {
-      legends[i].textContent = 'Achievement No.' + (i + 1);
+
+  window.addEventListener('achievementFieldRemoved', (event) => {
+    delete achievementMap[event.detail.id];
+    const achievementMapValues = Object.values(achievementMap);
+    let i = 0;
+    for (const a of achievementMapValues) {
+      a.updateNames(i);
+      const legend = a.getElement().querySelector('legend');
+      legend.textContent = 'Achievement No.' + (i + 1);
+      ++i;
     }
+    --achievementCount;
   });
 
   element.append(achievements, addBtn);

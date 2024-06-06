@@ -29,13 +29,25 @@
   font-family: inherit;
   font-size: inherit;
 }
+
 .is-employed > .radios > input[type='radio']:first-child:after {
   content: 'Yes';
 }
+
 .is-employed > .radios > input[type='radio']:last-child:after {
   content: 'No';
 }
+
 .is-employed > .radios > input[type='radio']:checked {
   background-color: var(--tertiary);
   color: var(--on-tertiary);
+}
+
+.achievements > fieldset {
+  position: relative;
+}
+.achievements > fieldset > .close {
+  position: absolute;
+  top: -9%;
+  right: -2%;
 }
