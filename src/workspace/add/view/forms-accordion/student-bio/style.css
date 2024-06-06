@@ -16,12 +16,26 @@
 }
 .achievement-adder > button {
   grid-column: 1/-1;
-}
-.achievement-adder > button {
   display: block;
   margin: 0 auto;
+  background-color: var(--secondary);
+  cursor: pointer;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  border: none;
 }
 
+.achievement-adder > button:hover {
+  background-color: var(--secondary-hover);
+}
+.achievement-adder > button:active {
+  background-color: var(--secondary-active);
+}
+.achievement-adder > button > img {
+  width: 100%;
+  height: 100%;
+}
 .is-employed > .radios > input[type='radio'] {
   appearance: none;
   padding: 0.2em 0.4em;

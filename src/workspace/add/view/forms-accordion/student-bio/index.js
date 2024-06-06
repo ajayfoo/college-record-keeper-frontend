@@ -13,6 +13,8 @@ import {
   stringBeforeNumbers,
 } from '../../../../../utils';
 
+import AddIconSrc from './images/add.svg';
+
 import { AccordionFormItem } from '../../components';
 import './style.css';
 
@@ -108,8 +110,13 @@ const AchievementAdder = (idPrefix) => {
   const achievementMap = {};
 
   const addBtn = document.createElement('button');
-  addBtn.textContent = 'Add Achievement';
   addBtn.type = 'button';
+
+  const addIcon = document.createElement('img');
+  addIcon.src = AddIconSrc;
+
+  addBtn.appendChild(addIcon);
+
   let achievementCount = 0;
   addBtn.addEventListener('click', async () => {
     const newIdPrefix = idPrefix + '-' + makeId(3) + '-achievement';
