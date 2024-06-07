@@ -123,7 +123,9 @@ const Results = async () => {
     const studentsData = await getFilteredStudents(
       event.detail.firstName,
       event.detail.yearOfAdmission,
+      event.detail.isEmployed,
     );
+    console.log(studentsData);
     updateWithStudentsData(studentsData);
   });
 

@@ -81,8 +81,8 @@ const AchievementFieldset = async (idPrefix, namePrefix, legend) => {
     const namePrefixWithoutNum = stringBeforeNumbers(namePrefix) + num + '.';
 
     nameField.name = namePrefixWithoutNum + 'name';
-    achievementType.name = namePrefixWithoutNum + 'type';
-    achievementLevel.name = namePrefixWithoutNum + 'level';
+    achievementType.name = namePrefixWithoutNum + 'achievementTypeId';
+    achievementLevel.name = namePrefixWithoutNum + 'achievementLevelId';
     prize.name = namePrefixWithoutNum + 'prize';
     date.name = namePrefixWithoutNum + 'date';
   };

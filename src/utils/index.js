@@ -80,10 +80,11 @@ const getCompanies = async () => {
   return response.json();
 };
 
-const getFilteredStudents = async (firstName, yearOfAdmission) => {
+const getFilteredStudents = async (firstName, yearOfAdmission, isEmployed) => {
   const data = {
-    firstName: firstName,
-    yearOfAdmission: yearOfAdmission,
+    firstName,
+    yearOfAdmission,
+    isEmployed,
   };
   const response = await fetch(process.env.BACKEND_URL + '/student/filtered', {
     credentials: 'include',

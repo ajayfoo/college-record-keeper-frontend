@@ -28,11 +28,15 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
     event.preventDefault();
     const data = {};
     const fieldNameValues = Array.from(form.elements)
-      .filter((e) => e.name !== '' && !e.disabled)
+      .filter((e) => {
+        if (e.type === 'radio') return e.checked;
+        return e.name !== '' && !e.disabled;
+      })
       .map((e) => {
         if (e.type === 'checkbox') return { name: e.name, value: e.checked };
         return { name: e.name, value: e.value };
       });
+    console.log(fieldNameValues);
     fieldNameValues.forEach((nameValue) => {
       strToObj(nameValue.name, nameValue.value, data);
     });

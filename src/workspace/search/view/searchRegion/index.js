@@ -18,6 +18,7 @@ const SearchText = () => {
       detail: {
         firstName: searchTextBox.value,
         yearOfAdmission: document.getElementById('filter-year-select').value,
+        isEmployed: document.getElementById('filter-placed-flag').checked,
       },
     });
     window.dispatchEvent(searchStudentEvent);
