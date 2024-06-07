@@ -32,7 +32,8 @@
 .achievement-adder > button:active {
   background-color: var(--secondary-active);
 }
-.achievement-adder > button > img {
+.achievement-adder > button > img,
+.achievements > fieldset > .close > img {
   width: 100%;
   height: 100%;
 }
@@ -40,6 +41,7 @@
   appearance: none;
   padding: 0.2em 0.4em;
   border-radius: 0.5em;
+  border: 1px solid var(--tertiary);
   font-family: inherit;
   font-size: inherit;
 }
@@ -59,9 +61,27 @@
 
 .achievements > fieldset {
   position: relative;
+  margin-bottom: 1em;
+  padding: 1.5em;
+  border-radius: 1.5em 0 1.5em 1.5em;
+  border: 1px solid var(--secondary);
+}
+.achievements > fieldset > legend {
+  text-align: center;
+  padding: 0.2em 0.75em;
+  border-radius: 0.5em;
+  background-color: var(--secondary);
+  color: var(--on-secondary);
 }
 .achievements > fieldset > .close {
   position: absolute;
-  top: -9%;
-  right: -2%;
+  top: -1.5em;
+  right: -1.5vmin;
+  left: auto;
+  width: 1.65em;
+  height: 1.65em;
+  background-color: var(--scrim);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
 }

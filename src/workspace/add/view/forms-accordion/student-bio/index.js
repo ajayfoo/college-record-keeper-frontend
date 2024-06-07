@@ -14,6 +14,7 @@ import {
 } from '../../../../../utils';
 
 import AddIconSrc from './images/add.svg';
+import CloseIconSrc from './images/close.svg';
 
 import { AccordionFormItem } from '../../components';
 import './style.css';
@@ -21,8 +22,13 @@ import './style.css';
 const AchievementFieldset = async (idPrefix, namePrefix, legend) => {
   const closeBtn = document.createElement('button');
   closeBtn.type = 'button';
-  closeBtn.textContent = 'X';
   closeBtn.classList.add('close');
+
+  const closeIcon = document.createElement('img');
+  closeIcon.src = CloseIconSrc;
+
+  closeBtn.appendChild(closeIcon);
+
   const achievementTypes = await getAchievementTypes();
   const achievementTypeField = SelectField(
     'Type',
@@ -111,6 +117,7 @@ const AchievementAdder = (idPrefix) => {
 
   const addBtn = document.createElement('button');
   addBtn.type = 'button';
+  addBtn.ariaLabel = 'Add';
 
   const addIcon = document.createElement('img');
   addIcon.src = AddIconSrc;
