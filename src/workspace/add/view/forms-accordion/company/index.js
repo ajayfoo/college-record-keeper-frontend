@@ -9,6 +9,7 @@ const Company = () => {
       minlength: 1,
       maxlength: 150,
       required: true,
+      autocomplete: 'on',
     }),
     Field('Mininum Salary', {
       id: `${ID_PREFIX}-minimum-salary`,

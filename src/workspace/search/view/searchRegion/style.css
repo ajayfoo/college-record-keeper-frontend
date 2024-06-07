@@ -49,6 +49,10 @@
 
 .filter-year > select {
   border-radius: 5px;
+  color: var(--on-tertiary);
+  background-color: var(--tertiary);
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .filter-placement-status {
