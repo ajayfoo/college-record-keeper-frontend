@@ -261,7 +261,7 @@ const StudentBio = async () => {
 
   const dispatchNewStudentBioAddedEvent = (response) => {
     const newStudentBioAddedEvent = new CustomEvent('newStudentBioAdded', {
-      detail: { ...response },
+      detail: { yearOfAdmission: response.yearOfAdmission },
     });
     window.dispatchEvent(newStudentBioAddedEvent);
   };

@@ -90,6 +90,8 @@ const Result = (resultInfo) => {
   deleteBtn.addEventListener('click', async () => {
     await deleteStudent(resultInfo.id);
     resultEle.remove();
+    const studentDeletedEvent = new CustomEvent('studentDeleted');
+    window.dispatchEvent(studentDeletedEvent);
   });
   deleteBtn.appendChild(deleteIcon);
 

@@ -78,23 +78,29 @@ const FilterYearElement = async () => {
 
   const filterYearSelect = document.createElement('select');
   filterYearSelect.id = 'filter-year-select';
-  const emptyYear = document.createElement('option');
-  emptyYear.textContent = 'Any';
-  emptyYear.value = 0;
-  emptyYear.selected = true;
-  filterYearSelect.appendChild(emptyYear);
-  const years = await getYearsOfAdmission();
-  console.log(years);
-  years.sort((a, b) => a - b);
-  years.forEach((year) => {
-    const opt = document.createElement('option');
-    opt.textContent = year;
-    opt.value = year;
-    filterYearSelect.appendChild(opt);
-  });
+  let years = [];
+  const update = async () => {
+    filterYearSelect.replaceChildren();
+    const emptyYear = document.createElement('option');
+    emptyYear.textContent = 'Any';
+    emptyYear.value = 0;
+    emptyYear.selected = true;
+    filterYearSelect.appendChild(emptyYear);
+    years = await getYearsOfAdmission();
+    years.sort((a, b) => a - b);
+    years.forEach((year) => {
+      const opt = document.createElement('option');
+      opt.textContent = year;
+      opt.value = year;
+      filterYearSelect.appendChild(opt);
+    });
+  };
 
+  window.addEventListener('studentDeleted', async () => {
+    await update();
+  });
   window.addEventListener('newStudentBioAdded', async (event) => {
-    const newYear = new Date(event.detail.yearOfAdmission).getFullYear();
+    const newYear = event.detail.yearOfAdmission;
     const yearOpts = filterYearSelect.querySelectorAll('option');
     if (years.includes(newYear)) return;
     years.push(newYear);
@@ -110,6 +116,8 @@ const FilterYearElement = async () => {
     }
     filterYearSelect.appendChild(newYearOpt);
   });
+
+  await update();
 
   filterYearEle.append(filterYearLabel, filterYearSelect);
 

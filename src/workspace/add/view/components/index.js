@@ -36,7 +36,6 @@ const AccordionFormItem = (name, fields, onSubmit = () => {}) => {
         if (e.type === 'checkbox') return { name: e.name, value: e.checked };
         return { name: e.name, value: e.value };
       });
-    console.log(fieldNameValues);
     fieldNameValues.forEach((nameValue) => {
       strToObj(nameValue.name, nameValue.value, data);
     });
