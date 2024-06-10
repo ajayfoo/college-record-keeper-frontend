@@ -1,5 +1,6 @@
 import { getYearsOfAdmission } from '../../../../utils';
 import './style.css';
+import ResetIconSrc from './images/reset.svg';
 
 const SearchText = () => {
   const searchTextEle = document.createElement('div');
@@ -14,11 +15,15 @@ const SearchText = () => {
   const searchBtn = document.createElement('button');
   searchBtn.textContent = 'Search';
   searchBtn.addEventListener('click', () => {
+    const noPlacementFilter =
+      !document.getElementById('filter-placed-flag').checked &&
+      !document.getElementById('filter-not-placed-flag').checked;
     const searchStudentEvent = new CustomEvent('searchStudent', {
       detail: {
         firstName: searchTextBox.value,
         yearOfAdmission: document.getElementById('filter-year-select').value,
         isEmployed: document.getElementById('filter-placed-flag').checked,
+        noPlacementFilter,
       },
     });
     window.dispatchEvent(searchStudentEvent);
@@ -43,7 +48,6 @@ const FilterPlacementStatus = () => {
   placedFlag.type = 'radio';
   placedFlag.id = 'filter-placed-flag';
   placedFlag.name = 'placement-status';
-  placedFlag.checked = true;
 
   const placementStatusFieldPlaced = document.createElement('div');
   placementStatusFieldPlaced.classList.add('placement-status-field');
@@ -58,12 +62,29 @@ const FilterPlacementStatus = () => {
   placementStatusFieldNotPlaced.classList.add('placement-status-field');
   placementStatusFieldNotPlaced.appendChild(notPlacedFlag);
 
+  const resetBtn = document.createElement('button');
+  resetBtn.ariaLabel = 'Reset';
+  resetBtn.title = 'Reset';
+  resetBtn.addEventListener('click', () => {
+    placedFlag.checked = false;
+    notPlacedFlag.checked = false;
+  });
+
+  const resetIcon = document.createElement('img');
+  resetIcon.src = ResetIconSrc;
+
+  resetBtn.appendChild(resetIcon);
+
   placementStatusFlags.append(
     placementStatusFieldPlaced,
     placementStatusFieldNotPlaced,
   );
 
-  filterPlacementStatusEle.append(placementStatusLabel, placementStatusFlags);
+  filterPlacementStatusEle.append(
+    placementStatusLabel,
+    placementStatusFlags,
+    resetBtn,
+  );
   return filterPlacementStatusEle;
 };
 

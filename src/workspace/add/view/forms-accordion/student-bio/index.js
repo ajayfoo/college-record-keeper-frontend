@@ -296,6 +296,7 @@ const StudentBio = async () => {
       min: 0,
       max: 100,
       value: 1,
+      step: 0.0001,
     }),
     Field('HSC Percentage', {
       id: `${ID_PREFIX}-hsc-percentage`,
@@ -304,6 +305,7 @@ const StudentBio = async () => {
       min: 0,
       max: 100,
       value: 1,
+      step: 0.0001,
     }),
     Field('SSC Percentage', {
       id: `${ID_PREFIX}-ssc-percentage`,
@@ -312,6 +314,7 @@ const StudentBio = async () => {
       min: 0,
       max: 100,
       value: 1,
+      step: 0.0001,
     }),
     Field('Date Of Birth', {
       id: `${ID_PREFIX}-dob`,

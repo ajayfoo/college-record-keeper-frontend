@@ -126,6 +126,7 @@ const Results = async () => {
       event.detail.firstName,
       event.detail.yearOfAdmission,
       event.detail.isEmployed,
+      event.detail.noPlacementFilter,
     );
     console.log(studentsData);
     updateWithStudentsData(studentsData);
